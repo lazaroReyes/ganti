@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="lazaroServer">
+    <serverData>
+      <paths name="lazaroServer">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="2015/ganti/web" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
