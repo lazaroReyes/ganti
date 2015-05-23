@@ -358,18 +358,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
-/*
-|--------------------------------------------------------------------------
-| Hooks
-|--------------------------------------------------------------------------
-*/
-$hook['post_controller_constructor'] = array(
-    'class' => 'EzRbacHook',
-    'function' => 'accessCheck',
-    'filename' => 'EzRbacHook.php',
-    'filepath' => 'third_party/ezRbac'
-);
-
-
 /* End of file config.php */
 /* Location: ./application/config/config.php */

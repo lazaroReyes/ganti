@@ -9,7 +9,12 @@
 |	http://codeigniter.com/user_guide/general/hooks.html
 |
 */
-
+$hook['post_controller_constructor'] = array(
+    'class' => 'EzRbacHook',
+    'function' => 'accessCheck',
+    'filename' => 'EzRbacHook.php',
+    'filepath' => 'third_party/ezRbac'
+);
 
 
 /* End of file hooks.php */
