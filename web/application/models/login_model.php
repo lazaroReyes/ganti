@@ -21,4 +21,10 @@ class Login_model extends CI_Model {
 			redirect(base_url().'login','refresh');
 		}
 	}
+
+    public  function  leer(){
+        $this->db->order_by('ID DESC');
+        $query = $this->db->get('users');
+        return $query->result();
+    }
 }

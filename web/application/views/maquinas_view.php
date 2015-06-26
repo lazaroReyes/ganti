@@ -33,7 +33,8 @@ if(isset($actualizarMaquina)){
     <?php if(count($maquinasGuardadas)>0):?>
         <?php foreach($maquinasGuardadas as $maquina) : ?>
             <table>
-                <tr><?php echo $maquina->ID; ?> -- <?php echo $maquina->Descripcion; ?>     </tr>
+                <tr><?php echo $maquina->ID; ?> -- </tr>
+                <tr><?php echo $maquina->Descripcion; ?>     </tr>
                 <tr><a href="<?php echo base_url(); ?>maquinas/index/<?php echo $maquina->ID; ?>">modificar    </a></tr>
                 <tr><a href="<?php echo base_url(); ?>maquinas/eliminar/<?php echo $maquina->ID; ?>">eliminar</a></p></tr>
             </table>
