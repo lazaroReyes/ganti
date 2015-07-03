@@ -5,6 +5,7 @@
 </head>
 <h1>Compras</h1>
 <h2>Bienvenido <?=$this->session->userdata('username')?></h2>
+<p><?=anchor(base_url().'login/logout_ci', 'Cerrar sesión')?></p>
 <?php
 if(isset($actualizarCompra)){
     $ID = '<p><input type="hidden" name="ID" value="'.$this->uri->segment(3).'"></p>';
@@ -51,6 +52,7 @@ if(isset($actualizarCompra)){
 }
 ?>
 <body>
+<?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil')=='Compras'){?>
 <form action="<?php echo base_url();?>compras/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <select name="IDProducto">
@@ -158,6 +160,7 @@ if(isset($actualizarCompra)){
     }
     ?>
 </form>
+<?php } ?>
 <?php if(count($comprasGuardados)>0):?>
 
     <?php foreach($comprasGuardados as $compra) : ?>
@@ -176,12 +179,14 @@ if(isset($actualizarCompra)){
             <tr><?php foreach($tarjetasGuardadas as $tarjeta) : if ($compra->IDTarjeta==$tarjeta->ID){echo $tarjeta->Descripcion; break;} endforeach;?> -- </tr>
             <tr><?php foreach ($maquinasGuardadas as $maquina) :  if ($compra->IDMaquina==$maquina->ID){ echo $maquina->Descripcion; break;} endforeach; ?>  -- </tr>
             <tr><?php foreach ($minasGuardadas as $minas) :  if ($compra->IDMina==$minas->ID){ echo $minas->Nombre; break;} endforeach; ?>  -- </tr>
-            <tr><?php echo $compra->FechaRequerido; ?> R -- </tr>
-            <tr><?php echo $compra->FechaPedido; ?> P -- </tr>
-            <tr><?php echo $compra->FechaEntregaDeProveedor; ?> EP -- </tr>
-            <tr><?php echo $compra->FechaEnviado; ?> E -- </tr>
+            <tr><?php echo $compra->FechaRequerido; ?> -- </tr>
+            <tr><?php echo $compra->FechaPedido; ?> -- </tr>
+            <tr><?php echo $compra->FechaEntregaDeProveedor; ?> --  </tr>
+            <tr><?php echo $compra->FechaEnviado; ?></tr>
+            <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil')=='Compras'){?>
             <tr><a href="<?php echo base_url(); ?>compras/index/<?php echo $compra->ID; ?>">modificar    </a></tr>
             <tr><a href="<?php echo base_url(); ?>compras/eliminar/<?php echo $compra->ID; ?>">eliminar</a></p></tr>
+            <?php } ?>
         </table>
     <?php endforeach; ?>
 <?php else :?>

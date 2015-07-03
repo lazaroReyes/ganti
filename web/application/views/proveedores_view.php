@@ -3,7 +3,9 @@
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title><?php echo $titulo;?></title>
 </head>
-<header>Proveedores</header>
+<h1>Proveedores</h1>
+<h2>Bienvenido <?=$this->session->userdata('username')?></h2>
+<p><?=anchor(base_url().'login/logout_ci', 'Cerrar sesión')?></p>
 <?php
 if(isset($actualizarProveedor)){
     $ID = '<p><input type="hidden" name="ID" value="'.$this->uri->segment(3).'"></p>';
@@ -20,6 +22,7 @@ if(isset($actualizarProveedor)){
 }
 ?>
 <body>
+<?php if($this->session->userdata('perfil')=='Administrador'){?>
 <form action="<?php echo base_url();?>proveedores/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <p><label>RFC:</label><input type="text" name="RFC" value="<?php echo $RFC?>"/></p>
@@ -33,14 +36,17 @@ if(isset($actualizarProveedor)){
     }
     ?>
 </form>
+<?php } ?>
 <?php if(count($proveedoresGuardadas)>0):?>
     <?php foreach($proveedoresGuardadas as $proveedor) : ?>
         <table>
             <tr><?php echo $proveedor->ID; ?> -- </tr>
             <tr><?php echo $proveedor->RFC; ?>     </tr>
             <tr><?php echo $proveedor->Nombre; ?>     </tr>
-            <tr><a href="<?php echo base_url(); ?>proveedores/index/<?php echo $proveedor->ID; ?>">modificar    </a></tr>
-            <tr><a href="<?php echo base_url(); ?>proveedores/eliminar/<?php echo $proveedor->ID; ?>">eliminar</a></p></tr>
+            <?php if($this->session->userdata('perfil')=='Administrador'){?>
+                <tr><a href="<?php echo base_url(); ?>proveedores/index/<?php echo $proveedor->ID; ?>">modificar    </a></tr>
+                <tr><a href="<?php echo base_url(); ?>proveedores/eliminar/<?php echo $proveedor->ID; ?>">eliminar</a></p></tr>
+            <?php } ?>
         </table>
     <?php endforeach; ?>
 <?php else :?>

@@ -3,7 +3,9 @@
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title><?php echo $titulo;?></title>
 </head>
-<header>Maquinas</header>
+<h1>Maquinas</h1>
+<h2>Bienvenido <?=$this->session->userdata('username')?></h2>
+<p><?=anchor(base_url().'login/logout_ci', 'Cerrar sesión')?></p>
 <?php
 if(isset($actualizarMaquina)){
     $ID = '<p><input type="hidden" name="ID" value="'.$this->uri->segment(3).'"></p>';
@@ -18,6 +20,7 @@ if(isset($actualizarMaquina)){
 }
 ?>
 <body>
+    <?php if($this->session->userdata('perfil')=='Administrador'){?>
     <form action="<?php echo base_url();?>maquinas/<?php echo $action;?>" method="post">
         <?php echo $ID; ?>
         <p><label>Descripcion:</label><input type="text" name="Descripcion" value="<?php echo $Descripcion?>"/></p>
@@ -30,13 +33,16 @@ if(isset($actualizarMaquina)){
         }
         ?>
     </form>
+    <?php } ?>
     <?php if(count($maquinasGuardadas)>0):?>
         <?php foreach($maquinasGuardadas as $maquina) : ?>
             <table>
                 <tr><?php echo $maquina->ID; ?> -- </tr>
                 <tr><?php echo $maquina->Descripcion; ?>     </tr>
+                <?php if($this->session->userdata('perfil')=='Administrador'){?>
                 <tr><a href="<?php echo base_url(); ?>maquinas/index/<?php echo $maquina->ID; ?>">modificar    </a></tr>
                 <tr><a href="<?php echo base_url(); ?>maquinas/eliminar/<?php echo $maquina->ID; ?>">eliminar</a></p></tr>
+                <?php } ?>
             </table>
         <?php endforeach; ?>
     <?php else :?>

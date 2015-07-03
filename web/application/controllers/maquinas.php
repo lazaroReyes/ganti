@@ -25,6 +25,10 @@ class Maquinas extends CI_Controller
 
     public function index()
     {
+        if($this->session->userdata('perfil') == FALSE)
+        {
+            redirect(base_url().'login');
+        }
         $data['titulo'] = 'Maquinas';
         $data['main_content']='inicio';
 

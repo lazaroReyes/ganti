@@ -3,7 +3,10 @@
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title><?php echo $titulo;?></title>
 </head>
-<header>Minas</header>
+<h1>Minas</h1>
+<h2>Bienvenido <?=$this->session->userdata('username')?></h2>
+<p><?=anchor(base_url().'login/logout_ci', 'Cerrar sesión')?></p>
+<?=anchor(base_url().'login/logout_ci', 'Cerrar sesión')?>
 <?php
 if(isset($actualizarMina)){
     $ID = '<p><input type="hidden" name="ID" value="'.$this->uri->segment(3).'"></p>';
@@ -20,6 +23,7 @@ if(isset($actualizarMina)){
 }
 ?>
 <body>
+<?php if($this->session->userdata('perfil')=='Administrador'){?>
 <form action="<?php echo base_url();?>minas/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <p><label>Nombre:</label><input type="text" name="Nombre" value="<?php echo $Nombre?>"/></p>
@@ -33,14 +37,17 @@ if(isset($actualizarMina)){
     }
     ?>
 </form>
+<?php } ?>
 <?php if(count($minasGuardadas)>0):?>
     <?php foreach($minasGuardadas as $mina) : ?>
         <table>
             <tr><?php echo $mina->ID; ?> -- </tr>
             <tr><?php echo $mina->Nombre; ?>     </tr>
             <tr><?php echo $mina->Descripcion; ?>     </tr>
+            <?php if($this->session->userdata('perfil')=='Administrador'){?>
             <tr><a href="<?php echo base_url(); ?>minas/index/<?php echo $mina->ID; ?>">modificar    </a></tr>
             <tr><a href="<?php echo base_url(); ?>minas/eliminar/<?php echo $mina->ID; ?>">eliminar</a></p></tr>
+            <?php } ?>
         </table>
     <?php endforeach; ?>
 <?php else :?>
