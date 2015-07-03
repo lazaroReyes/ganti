@@ -25,7 +25,6 @@ if(isset($actualizarCompra)){
     $FechaPedido = $actualizarCompra->FechaPedido;
     $FechaEntregaDeProveedor = $actualizarCompra->FechaEntregaDeProveedor;
     $FechaEnviado = $actualizarCompra->FechaEnviado;
-    $selectEDC = '';
     $action = 'actualizar';
     $button = 'Actualizar';
 }else{
@@ -55,53 +54,101 @@ if(isset($actualizarCompra)){
 <form action="<?php echo base_url();?>compras/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <select name="IDProducto">
-        <?php foreach($productosGuardados as $producto) :?>
-            <option value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
-        <?php endforeach; ?>
+        <?php foreach($productosGuardados as $producto) :
+            if($producto->ID==$IDProducto){?>
+            <option selected value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
+            <?php }else {?>
+                <option value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
+        <?php } endforeach; ?>
     </select>
     <p><label>Descripcion:</label><input type="text" name="Descripcion" value="<?php echo $Descripcion?>"/></p>
     <p><label>Cantidad:</label><input type="text" name="Cantidad" value="<?php echo $Cantidad?>"/></p>
     <p><label>Costo total:</label><input type="text" name="Costo" value="<?php echo $Costo?>"/></p>
     <p><label>NoFactura:</label><input type="text" name="NoFactura" value="<?php echo $NoFactura?>"/></p>
-    <select name="MetodoPago">
-            <option value="Efectivo">Efectivo</option>
-            <option value="Tarjeta">Tarjeta</option>
+    <select name="MetodoPago" id="MDP" onChange="ver()">
+            <?php if($MetodoPago=='Tarjeta'){?>
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="Efectivo">Efectivo</option>
+            <?php }else { ?>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta</option>
+            <?php } ?>
     </select>
     <select name="IDProveedor">
-        <?php foreach($proveedoresGuardados as $provedor) :?>
-            <option value="<?php echo $provedor->ID?>"><?php echo $provedor->Nombre?></option>
-        <?php endforeach; ?>
+        <?php foreach($proveedoresGuardados as $provedor) :
+            if($provedor->ID==$IDProveedor){?>
+                <option selected value="<?php echo $provedor->ID?>"><?php echo $provedor->Nombre?></option>
+            <?php }else {?>
+                <option value="<?php echo $provedor->ID?>"><?php echo $provedor->Nombre?></option>
+        <?php } endforeach; ?>
     </select>
-    <p><?php echo $EstadoDeCompra ?></p>
     <?php if($EstadoDeCompra==''){
     ?><p><input type="hidden" name="EstadoDeCompra" value="Requerido"></p><?php
     }else{?>
     <select name="EstadoDeCompra">
-        <?php} if($EstadoDeCompra=='Requerido' || $EstadoDeCompra=='Pedido'){?><option value="Pedido">Pedido</option>
-        <?php if($EstadoDeCompra!='Enviado'){?><option value="Entregado por proveedor">Entregado por el proveedor</option><?php } ?>
-        <option value="Enviado">Enviado</option>
+        <?php switch($EstadoDeCompra){
+            case 'Requerido': ?>
+                <option value="Requerido">Requerido</option>
+                <option value="Pedido">Pedido</option>
+                <option value="Entregado por proveedor">Entregado por el proveedor</option>
+                <option value="Enviado">Enviado</option>
+            <?php break;
+            case 'Pedido': ?>
+                <option value="Pedido">Pedido</option>
+                <option value="Entregado por proveedor">Entregado por el proveedor</option>
+                <option value="Enviado">Enviado</option>
+                <?php break;
+            case 'Entregado por proveedor': ?>
+                <option value="Entregado por proveedor">Entregado por el proveedor</option>
+                <option value="Enviado">Enviado</option>
+                <?php break;
+            case 'Enviado': ?>
+                <option value="Enviado">Enviado</option>
+                <?php break;
+        }?>
     </select>
     <?php }?>
     <p><input type="hidden" name="IDUsuario" value="<?=$this->session->userdata('id_usuario')?>"></p>
     <select name="EstadoDePago">
-        <option value="Pagado">Pagado</option>
-        <option value="Credito">Credito</option>
+        <?php if ($EstadoDePago=='Pagado'){ ?>
+            <option value="Pagado">Pagado</option>
+            <option value="Credito">Credito</option>
+        <?php }else{ ?>
+            <option value="Credito">Credito</option>
+            <option value="Pagado">Pagado</option>
+        <?php } ?>
     </select>
     <select name="IDTarjeta">
-        <?php foreach($tarjetasGuardadas as $tarjeta) :?>
-            <option value="<?php echo $tarjeta->ID?>"><?php echo $tarjeta->Descripcion?></option>
-        <?php endforeach; ?>
+            <option value="Efectivo">Efectivo</option>
+        <?php foreach($tarjetasGuardadas as $tarjeta) :
+            if($tarjeta->ID==$IDTarjeta){?>
+                <option selected value="<?php echo $tarjeta->ID?>"><?php echo $tarjeta->Descripcion?></option>
+            <?php }else {?>
+                <option value="<?php echo $tarjeta->ID?>"><?php echo $tarjeta->Descripcion?></option>
+            <?php } endforeach; ?>
     </select>
     <select name="IDMaquina">
-        <?php foreach($maquinasGuardadas as $maquina) :?>
-            <option value="<?php echo $maquina->ID?>"><?php echo $maquina->Descripcion?></option>
-        <?php endforeach; ?>
+        <?php foreach($maquinasGuardadas as $maquina) :
+            if($maquina->ID==$IDMaquina){?>
+            <option selected value="<?php echo $maquina->ID?>"><?php echo $maquina->Descripcion?></option>
+            <?php }else {?>
+                <option value="<?php echo $maquina->ID?>"><?php echo $maquina->Descripcion?></option>
+            <?php } endforeach; ?>
     </select>
     <select name="IDMina">
-        <?php foreach($minasGuardadas as $mina) :?>
-            <option value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
-        <?php endforeach; ?>
+        <?php foreach($minasGuardadas as $mina) :
+            if($mina->ID==$IDMina){?>
+                <option selected value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
+            <?php }else {?>
+                <option value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
+            <?php } endforeach; ?>
     </select>
+    <?php if ($ID!=''){?>
+        <p><label>Fecha Requerido:</label><input type="hidden" name="FechaRequerido" value="<?php echo $FechaRequerido?>"/><?php echo $FechaRequerido?></p>
+        <p><label>Fecha Pedido:</label><input type="hidden" name="FechaPedido" value="<?php echo $FechaPedido?>"/><?php echo $FechaPedido?></p>
+        <p><label>Fecha Entregado por proveedor:</label><input type="hidden" name="FechaEntregaDeProveedor" value="<?php echo $FechaEntregaDeProveedor?>"/><?php echo $FechaEntregaDeProveedor?></p>
+        <p><label>Fecha Enviado:</label><input type="hidden" name="FechaEnviado" value="<?php echo $FechaEnviado?>"/><?php echo $FechaEnviado?></p>
+    <?php } ?>
     <p><input type="submit" name="guardar" value="<?php echo $button?>" /></p>
     <?php
     $actualizar = $this->session->flashdata('actualizado');
@@ -126,7 +173,7 @@ if(isset($actualizarCompra)){
             <tr><?php echo $compra->EstadoDeCompra;?> -- </tr>
             <tr><?php foreach ($usuariosGuardados as $usuarios) :  if ($compra->IDUsuario==$usuarios->ID){ echo $usuarios->username; break;} endforeach; ?>  -- </tr>
             <tr><?php echo $compra->EstadoDePago;?> -- </tr>
-            <tr><?php echo $compra->IDTarjeta;?> -- </tr>
+            <tr><?php foreach($tarjetasGuardadas as $tarjeta) : if ($compra->IDTarjeta==$tarjeta->ID){echo $tarjeta->Descripcion; break;} endforeach;?> -- </tr>
             <tr><?php foreach ($maquinasGuardadas as $maquina) :  if ($compra->IDMaquina==$maquina->ID){ echo $maquina->Descripcion; break;} endforeach; ?>  -- </tr>
             <tr><?php foreach ($minasGuardadas as $minas) :  if ($compra->IDMina==$minas->ID){ echo $minas->Nombre; break;} endforeach; ?>  -- </tr>
             <tr><?php echo $compra->FechaRequerido; ?> R -- </tr>
@@ -140,5 +187,14 @@ if(isset($actualizarCompra)){
 <?php else :?>
     <h2>no hay compras registrados</h2>
 <?php endif; ?>
+<?php echo '<script>';
+    echo 'var MDPSeleccionado="";';
+    echo 'function ver(){';
+    echo 'var seleccion=document.getElementById("MDP");';
+    echo 'MDPSeleccionado = seleccion.value;';
+    echo 'alert(MDPSeleccionado);';
+    echo '}';
+    echo '</script>';
+?>
 </body>
 </html>

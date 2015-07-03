@@ -29,14 +29,20 @@ if(isset($actualizarUso)){
 <form action="<?php echo base_url();?>usos/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <select name="IDMina">
-        <?php foreach($minasGuardadas as $mina) :?>
-        <option value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
-        <?php endforeach; ?>
+        <?php foreach($minasGuardadas as $mina) :
+            if($mina->ID==$IDMina){?>
+                <option selected value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
+            <?php }else {?>
+                <option value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
+            <?php } endforeach; ?>
     </select>
     <select name="IDProducto">
-        <?php foreach($productosGuardados as $producto) :?>
-            <option value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
-        <?php endforeach; ?>
+        <?php foreach($productosGuardados as $producto) :
+            if($producto->ID==$IDProducto){?>
+                <option selected value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
+            <?php }else {?>
+                <option value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
+            <?php } endforeach; ?>
     </select>
     <p><label>Cantidad:</label><input type="text" name="Cantidad" value="<?php echo $Cantidad?>"/></p>
     <p><input type="hidden" name="IDUsuario" value="<?=$this->session->userdata('id_usuario')?>"></p>
