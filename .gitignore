@@ -42,5 +42,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 web/.idea/*
+web/.idea/workspace.xml
 *.xml
 *.xml

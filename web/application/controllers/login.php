@@ -23,7 +23,9 @@ class Login extends CI_Controller
 			case '':
 				$data['token'] = $this->token();
 				$data['titulo'] = 'Iniciar sesión';
-				$this->load->view('login_view',$data);
+                $this->load->view('partials/header_view', $data);
+                $this->load->view('login_view',$data);
+                $this->load->view('partials/footer_view');
 				break;
 			case 'Administrador':
 				redirect(base_url().'admin');
@@ -36,7 +38,9 @@ class Login extends CI_Controller
 				break;
 			default:		
 				$data['titulo'] = 'Iniciar sesión';
-				$this->load->view('login_view',$data);
+                $this->load->view('partials/header_view', $data);
+				$this->load->view('login_view', $data);
+                $this->load->view('partials/footer_view');
 				break;		
 		}
 	}

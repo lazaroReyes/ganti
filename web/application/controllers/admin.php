@@ -18,6 +18,8 @@ class Admin extends CI_Controller {
 			redirect(base_url().'login');
 		}
 		$data['titulo'] = 'Bienvenido Administrador';
+        $this->load->view('partials/header_view', $data);
 		$this->load->view('admin_view',$data);
+        $this->load->view('partials/footer_view');
 	}
 }

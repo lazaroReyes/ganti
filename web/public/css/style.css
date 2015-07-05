@@ -1,0 +1,69 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+/* MENU */
+.navbar-brand {
+    padding: 0 0 0 15px;
+}
+/* CONTENT */
+#campos_login {
+    width: 80%;
+    display: block;
+    margin: 50px auto 0;
+    padding: 50px 0;
+    border: 1px solid #4d4b4c;
+    border-radius: 15px;
+}
+
+#campos_login input {
+    width: 332px;
+    margin: 25px auto;
+}
+
+.red-submit {
+    background-color: #d40000;
+    display: block;
+    color: #fff;
+}
+.form-error {
+    color: #d40000;
+    width: 332px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.jumbotron {
+    background-color: inherit;
+}
+
+/* MISC */
+body {
+    background-color: #fff;
+    font-family: "Open Sans";
+    font-size: 14px;
+}
+
+.margin-bottom {
+    margin-bottom: 30px;
+}
+/* MEDIA QUERY */
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    #campos_login input, .form-error {
+        width: 80%;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #campos_login {
+        width: 50%;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    #campos_login {
+        width: 50%;
+    }
+}
