@@ -73,7 +73,9 @@ class Compras extends CI_Controller
 
 
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('compras_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){

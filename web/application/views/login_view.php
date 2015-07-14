@@ -3,7 +3,7 @@ $username = array('name' => 'username', 'placeholder' => 'Nombre de usuario', 'c
 $password = array('name' => 'password', 'placeholder' => 'Contraseña', 'class' => 'form-control', 'id' => 'password');
 $submit = array('name' => 'submit', 'value' => 'Iniciar sesión', 'title' => 'Iniciar sesión');
 ?>
-<div class="jumbotron">
+<div class="jumbotron login-window">
     <div class="container">
         <div class="row">
             <div id="formulario_login">

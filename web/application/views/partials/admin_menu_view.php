@@ -17,9 +17,7 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?= $this->session->userdata('perfil') ?></a>
                 </li>
                 <li class="divider"></li>
                 <li><?=anchor('login/logout_ci', '<i class="fa fa-sign-out fa-fw"></i> Logout') ?>
@@ -45,16 +43,13 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Compras<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">Flot Charts</a>
-                        </li>
-                        <li>
-                            <a href="morris.html">Morris.js Charts</a>
+                            <a href="compras">Compras</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
