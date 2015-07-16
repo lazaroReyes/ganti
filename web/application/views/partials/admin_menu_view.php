@@ -67,7 +67,7 @@
                     <a href="usos"><i class="fa fa-exchange fa-fw"></i> Usos</a>
                 </li>
                 <li>
-                    <a href="usuario"><i class="fa fa-users fa-fw"></i> Usuarios</a>
+                    <a href="usuarios"><i class="fa fa-users fa-fw"></i> Usuarios</a>
                 </li>
             </ul>
         </div>
