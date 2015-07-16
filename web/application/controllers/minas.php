@@ -42,7 +42,9 @@ class Minas extends CI_Controller
             $data['actualizarMina'] = $this->minas_model->consultaMina($id);
         }
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('minas_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){

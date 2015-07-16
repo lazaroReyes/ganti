@@ -258,7 +258,7 @@ if (isset($actualizarCompra)) {
                             $actualizar = $this->session->flashdata('actualizado');
                             if ($actualizar) {
                                 ?>
-                                <td colspan="5" id="actualizadoCorrectamente"><?= $actualizar ?></td>
+                                <span id="actualizadoCorrectamente"><?= $actualizar ?></span>
                             <?php
                             }
                             ?>
@@ -288,8 +288,8 @@ if (isset($actualizarCompra)) {
                                 <th>Fecha entrega del proveedor</th>
                                 <th>Fecha enviado</th>
                                 <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
-                                    <th></th>
-                                    <th></th>
+                                    <th class="text-center">Editar</th>
+                                    <th class="text-center">Eliminar</th>
                                 <?php } ?>
                                 </thead>
                                 <tbody>
@@ -332,10 +332,10 @@ if (isset($actualizarCompra)) {
                                         <td><?php echo $compra->FechaEntregaDeProveedor; ?></td>
                                         <td><?php echo $compra->FechaEnviado; ?></td>
                                         <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="<?php echo base_url(); ?>compras/index/<?php echo $compra->ID; ?>"><i class="fa fa-pencil-square-o"></i></a>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="<?php echo base_url(); ?>compras/eliminar/<?php echo $compra->ID; ?>"><i class="fa fa-times"></i></a>
                                             </td>
                                         <?php } ?>

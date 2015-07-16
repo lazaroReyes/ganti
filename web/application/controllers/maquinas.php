@@ -40,7 +40,9 @@ class Maquinas extends CI_Controller
             $data['actualizarMaquina'] = $this->maquinas_model->consultaMaquina($id);
         }
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('maquinas_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){

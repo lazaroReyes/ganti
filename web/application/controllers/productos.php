@@ -42,7 +42,9 @@ class Productos extends CI_Controller
             $data['actualizarProducto'] = $this->productos_model->consultaProducto($id);
         }
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('productos_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){

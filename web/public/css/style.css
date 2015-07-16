@@ -50,6 +50,7 @@
 
 .page-header {
     background-color: #d81b22;
+    padding-left: 15px;
 }
 
 .table-striped a i.fa-pencil-square-o, .table-striped a i.fa-times {
