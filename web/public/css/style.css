@@ -64,8 +64,13 @@
     height: 100%;
 }
 
-a {
-    color: #262626 !important;
+#side-menu > li > a, a {
+    color: #464648 !important;
+}
+
+#side-menu > li > a:hover, #side-menu > li > a:active, #side-menu > li > a.active {
+    color: #F11C1E !important;
+    text-decoration: none;
 }
 
 /* MISC */

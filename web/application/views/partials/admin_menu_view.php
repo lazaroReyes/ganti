@@ -17,7 +17,7 @@
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?= $this->session->userdata('perfil') ?></a>
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> <?= $this->session->userdata('username') ?></a>
                 </li>
                 <li><a href="#"><i class="fa fa-cog fa-fw"></i> Configurar</a>
                 </li>
@@ -34,31 +34,31 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <?=anchor('admin', '<i class="fa fa-dashboard fa-fw"></i> Dashboard') ?>
                 </li>
                 <li>
-                    <a href="compras"><i class="fa fa-shopping-cart fa-fw"></i> Requisiciones</a>
+                    <?=anchor('compras', '<i class="fa fa-shopping-cart fa-fw"></i> Requisiciones') ?>
                 </li>
                 <li>
-                    <a href="maquinas"><i class="fa fa-cogs fa-fw"></i> Maquinas</a>
+                    <?=anchor('maquinas', '<i class="fa fa-cogs fa-fw"></i> Maquinas') ?>
                 </li>
                 <li>
-                    <a href="minas"><i class="fa fa-compass fa-fw"></i> Departamentos</a>
+                    <?=anchor('minas', '<i class="fa fa-sitemap fa-fw"></i> Departamentos') ?>
                 </li>
                 <li>
-                    <a href="productos"><i class="fa fa-cubes fa-fw"></i> Productos</a>
+                    <?=anchor('productos', '<i class="fa fa-cubes fa-fw"></i> Productos') ?>
                 </li>
                 <li>
-                    <a href="proveedores"><i class="fa fa-truck fa-fw"></i> Proveedores</a>
+                    <?=anchor('proveedores', '<i class="fa fa-truck fa-fw"></i> Proveedores') ?>
                 </li>
                 <li>
-                    <a href="tarjetas"><i class="fa fa-credit-card fa-fw"></i> Tarjetas</a>
+                    <?=anchor('tarjetas', '<i class="fa fa-credit-card fa-fw"></i> Tarjetas') ?>
                 </li>
                 <li>
-                    <a href="usos"><i class="fa fa-exchange fa-fw"></i> Usos</a>
+                    <?=anchor('usos', '<i class="fa fa-exchange fa-fw"></i> Usos') ?>
                 </li>
                 <li>
-                    <a href="usuarios"><i class="fa fa-users fa-fw"></i> Usuarios</a>
+                    <?=anchor('usuarios', '<i class="fa fa-users fa-fw"></i> Usuarios') ?>
                 </li>
             </ul>
         </div>

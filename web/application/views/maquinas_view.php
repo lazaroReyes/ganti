@@ -19,25 +19,27 @@ if (isset($actualizarMaquina)) {
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Maquinas</h1>
-
                 <div class="divider"></div>
                 <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                     <form action="<?php echo base_url(); ?>maquinas/<?php echo $action; ?>" method="post" class="margin-bottom">
                         <?php echo $ID; ?>
-                        <div class="col-sm-6">
-                            <label for="Descripcion">Descripcion:</label>
-                            <input type="text" class="form-control" id="Descripcion" name="Descripcion"
-                                   value="<?php echo $Descripcion ?>"/>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="numeroEconomico">Número Económico:</label>
-                            <input type="text" class="form-control" id="numeroEconomico" name="numeroEconomico"
-                                   value="<?php echo $numeroEconomico ?>"/>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label for="Descripcion">Descripcion:</label>
+                                <input type="text" class="form-control" id="Descripcion" name="Descripcion"
+                                       value="<?php echo $Descripcion ?>"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="numeroEconomico">Número Económico:</label>
+                                <input type="text" class="form-control" id="numeroEconomico" name="numeroEconomico"
+                                       value="<?php echo $numeroEconomico ?>"/>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn red-submit" name="guardar" value="<?php echo $button ?>"/>
+                            <div class="col-sm-3">
+                                <input type="submit" class="btn red-submit" name="guardar" value="<?php echo $button ?>"/>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                         <?php

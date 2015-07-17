@@ -283,12 +283,10 @@ if (isset($actualizarCompra)) {
                                     </div>
                             <?php } ?>
                             <div class="form-group">
-                                <div class="col-sm-4" aria-hidden="true"></div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <input type="submit" name="guardar" class="btn red-submit form-control"
                                            value="<?php echo $button ?>"/>
                                 </div>
-                                <div class="col-sm-4" aria-hidden="true"></div>
                                 <div class="clearfix"></div>
                             </div>
                             <?php

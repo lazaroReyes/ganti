@@ -55,7 +55,9 @@ class Usos extends CI_Controller
         $data['usuariosGuardados'] = $this->login_model->leer();
 
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('usos_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){
