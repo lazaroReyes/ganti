@@ -29,6 +29,7 @@ $submit = array('name' => 'submit', 'value' => 'Iniciar sesión', 'title' => 'In
                     }
                     ?>
                 </div>
+                </div>
             </div>
         </div>
     </div>

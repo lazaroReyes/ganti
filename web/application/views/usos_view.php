@@ -13,6 +13,7 @@ if(isset($actualizarUso)){
     $IDProducto = $actualizarUso->IDProducto;
     $Cantidad = $actualizarUso->Cantidad;
     $IDUsuario = $actualizarUso->IDUsuario;
+    $RecibidoPor = $actualizarUso->RecibidoPor;
     $Fecha = $actualizarUso->Fecha;
     $action = 'actualizar';
     $button = 'Actualizar';
@@ -22,6 +23,7 @@ if(isset($actualizarUso)){
     $IDProducto = '';
     $Cantidad = '';
     $IDUsuario = '';
+    $RecibidoPor = '';
     $Fecha = '';
     $action = 'insertar';
     $button = 'Guardar';
@@ -48,6 +50,7 @@ if(isset($actualizarUso)){
             <?php } endforeach; ?>
     </select>
     <p><label>Cantidad:</label><input type="text" name="Cantidad" value="<?php echo $Cantidad?>"/></p>
+    <p><label>Recibido Por:</label><input type="text" name="RecibidoPor" value="<?php echo $RecibidoPor?>"/></p>
     <p><input type="hidden" name="IDUsuario" value="<?=$this->session->userdata('id_usuario')?>"></p>
     <p><label>Fecha de uso:</label><input type="date" name="Fecha" value="<?php echo $Fecha?>"/></p>
     <p><input type="submit" name="guardar" value="<?php echo $button?>" /></p>
@@ -69,8 +72,9 @@ if(isset($actualizarUso)){
             <tr><?php foreach ($productosGuardados as $productos) :  if ($uso->IDProducto==$productos->ID){ echo $productos->Descripcion; break;} endforeach; ?>  -- </tr>
             <tr><?php echo $uso->Cantidad; ?>  -- </tr>
             <tr><?php foreach ($usuariosGuardados as $usuarios) :  if ($uso->IDUsuario==$usuarios->ID){ echo $usuarios->username; break;} endforeach; ?>  -- </tr>
+            <tr><?php echo $uso->RecibidoPor;?> -- </tr>
             <tr><?php echo $uso->Fecha; ?>     </tr>
-            <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil')=='Compras'){?>
+            <?php if($this->session->userdata('perfil')=='Administrador'){?>
                 <tr><a href="<?php echo base_url(); ?>usos/index/<?php echo $uso->ID; ?>">modificar    </a></tr>
                 <tr><a href="<?php echo base_url(); ?>usos/eliminar/<?php echo $uso->ID; ?>">eliminar</a></p></tr>
             <?php } ?>

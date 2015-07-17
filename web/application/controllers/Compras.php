@@ -28,14 +28,13 @@ class Compras extends CI_Controller
             'IDProveedor' => $this->input->post('IDProveedor'),
             'EstadoDeCompra' => $this->input->post('EstadoDeCompra'),
             'IDUsuario' => $this->input->post('IDUsuario'),
-            'EstadoDePago' => $this->input->post('EstadoDePago'),
             'IDTarjeta' => $this->input->post('IDTarjeta'),
             'IDMaquina' => $this->input->post('IDMaquina'),
             'IDMina' => $this->input->post('IDMina'),
             'FechaRequerido' => date("Y")."-".date("m")."-".date("d"),
             'FechaPedido' => '',
-            'FechaEntregaDeProveedor' => '',
-            'FechaEnviado' => ''
+            'FechaEnviado' => '',
+            'FechaRecibido' => ''
         );
         if($this->compras_model->insertar($compra))
             redirect('compras');
@@ -89,21 +88,20 @@ class Compras extends CI_Controller
             'IDProveedor' => $this->input->post('IDProveedor'),
             'EstadoDeCompra' => $this->input->post('EstadoDeCompra'),
             'IDUsuario' => $this->input->post('IDUsuario'),
-            'EstadoDePago' => $this->input->post('EstadoDePago'),
             'IDTarjeta' => $this->input->post('IDTarjeta'),
             'IDMaquina' => $this->input->post('IDMaquina'),
             'IDMina' => $this->input->post('IDMina'),
             'FechaRequerido' => $this->input->post('FechaRequerido'),
             'FechaPedido' => $this->input->post('FechaPedido'),
-            'FechaEntregaDeProveedor' => $this->input->post('FechaEntrgaDeProveedor'),
-            'FechaEnviado' => $this->input->post('FechaEnviado')
+            'FechaEnviado' => $this->input->post('FechaEnviado'),
+            'FechaRecibido' => $this->input->post('FechaRecibido')
         );
         if ($compra['EstadoDeCompra']=="Pedido"){
             $compra['FechaPedido'] = date("Y")."-".date("m")."-".date("d");
-        }elseif($compra['EstadoDeCompra']=="Entregado por proveedor"){
-            $compra['FechaEntregaDeProveedor'] = date("Y")."-".date("m")."-".date("d");
-        }else{
+        }elseif($compra['EstadoDeCompra']=="Enviado"){
             $compra['FechaEnviado'] = date("Y")."-".date("m")."-".date("d");
+        }else{
+            $compra['FechaRecibido'] = date("Y")."-".date("m")."-".date("d");
         }
         $id = $this->input->post('ID');{
 

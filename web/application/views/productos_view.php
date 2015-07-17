@@ -21,7 +21,7 @@ if(isset($actualizarProducto)){
                     <h1 class="page-header">Productos</h1>
 
                     <div class="divider"></div>
-                    <?php if($this->session->userdata('perfil')=='Administrador'){?>
+                    <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
                         <form action="<?php echo base_url();?>productos/<?php echo $action;?>" method="post" class="margin-bottom">
                             <?php echo $ID; ?>
                             <div class="form-group">
@@ -58,10 +58,11 @@ if(isset($actualizarProducto)){
                             <th>Producto</th>
                             <th>Clave</th>
                             <th>Descripción</th>
-                            <?php if($this->session->userdata('perfil')=='Administrador'){?>
+                            <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
                             <th class="text-center">Editar</th>
+                            <?php if ($this->session->userdata('perfil') == 'Administrador'){?>
                             <th class="text-center">Eliminar</th>
-                            <?php } ?>
+                            <?php } } ?>
                             </thead>
                             <tbody>
                             <?php foreach($productosGuardadas as $producto) : ?>
@@ -69,10 +70,11 @@ if(isset($actualizarProducto)){
                                     <td><?php echo $producto->ID; ?></td>
                                     <td><?php echo $producto->Clave; ?></td>
                                     <td><?php echo $producto->Descripcion; ?></td>
-                                    <?php if($this->session->userdata('perfil')=='Administrador'){?>
+                                    <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
                                         <td class="text-center"><a href="<?php echo base_url(); ?>productos/index/<?php echo $producto->ID; ?>"><i class="fa fa-pencil-square-o"></i></a></td>
+                                    <?php if ($this->session->userdata('perfil') == 'Administrador'){?>
                                         <td class="text-center"><a href="<?php echo base_url(); ?>productos/eliminar/<?php echo $producto->ID; ?>"><i class="fa fa-times"></i></a></td>
-                                    <?php } ?>
+                                    <?php } } ?>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

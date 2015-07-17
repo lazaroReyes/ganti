@@ -18,7 +18,7 @@ if (isset($actualizarMina)) {
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Minas</h1>
+                <h1 class="page-header">Departamentos</h1>
                 <?php if ($this->session->userdata('perfil') == 'Administrador') { ?>
                     <form action="<?php echo base_url(); ?>minas/<?php echo $action; ?>" method="post"
                           class="margin-bottom">
@@ -55,7 +55,7 @@ if (isset($actualizarMina)) {
                     <?php if (count($minasGuardadas) > 0): ?>
                         <table class="table table-striped table-condensed">
                             <thead>
-                            <th>Mina</th>
+                            <th>Departamentos</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <?php if ($this->session->userdata('perfil') == 'Administrador') { ?>
@@ -79,7 +79,7 @@ if (isset($actualizarMina)) {
                             </tbody>
                         </table>
                     <?php else : ?>
-                        <h2>no hay minas registradas</h2>
+                        <h2>no hay departamentos registradas</h2>
                     <?php endif; ?>
                 </div>
             </div>

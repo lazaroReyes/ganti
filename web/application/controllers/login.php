@@ -34,7 +34,7 @@ class Login extends CI_Controller
 				redirect(base_url().'Compras');
 				break;	
 			case 'Usuario':
-				redirect(base_url().'Usuario');
+				redirect(base_url().'Compras');
 				break;
 			default:		
 				$data['titulo'] = 'Iniciar sesión';

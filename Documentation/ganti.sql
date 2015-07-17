@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2015 a las 01:19:45
+-- Tiempo de generación: 17-07-2015 a las 19:23:02
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -37,25 +37,27 @@ CREATE TABLE IF NOT EXISTS `compras` (
   `IDProveedor` int(11) DEFAULT NULL,
   `EstadoDeCompra` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `IDUsuario` int(11) NOT NULL,
-  `EstadoDePago` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `IDTarjeta` int(11) DEFAULT NULL,
   `IDMaquina` int(11) NOT NULL,
   `IDMina` int(11) NOT NULL,
   `FechaRequerido` date NOT NULL,
   `FechaPedido` date DEFAULT NULL,
-  `FechaEntregaDeProveedor` date DEFAULT NULL,
-  `FechaEnviado` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `FechaEnviado` date DEFAULT NULL,
+  `FechaRecibido` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `compras`
 --
 
-INSERT INTO `compras` (`ID`, `IDProducto`, `Descripcion`, `Cantidad`, `Costo`, `NoFactura`, `MetodoPago`, `IDProveedor`, `EstadoDeCompra`, `IDUsuario`, `EstadoDePago`, `IDTarjeta`, `IDMaquina`, `IDMina`, `FechaRequerido`, `FechaPedido`, `FechaEntregaDeProveedor`, `FechaEnviado`) VALUES
-(4, 4, 'Las dos delanteras', 2, 1500, 'SRWSFGE2', 'Efectivo', 4, 'Entregado por proveedor', 0, 'Pagado', 3, 16, 4, '0000-00-00', '0000-00-00', '2015-06-27', '0000-00-00'),
-(5, 2, 'Filtro para el que esta en la mina', 2, 750, 'SRWSFG321', 'Tarjeta', 3, 'Requerido', 1, 'Credito', 2, 5, 3, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00'),
-(6, 4, 'Las dos de atras', 2, 1500, 'SRWSFG321', 'Efectivo', 4, 'Pedido', 0, 'Pagado', 3, 16, 4, '0000-00-00', '2015-06-27', '0000-00-00', '0000-00-00'),
-(7, 4, 'la del radio', 1, 15, 'eTDER234FDS', 'Efectivo', 4, 'Requerido', 1, 'Pagado', 3, 5, 1, '2015-06-26', '0000-00-00', '0000-00-00', '0000-00-00');
+INSERT INTO `compras` (`ID`, `IDProducto`, `Descripcion`, `Cantidad`, `Costo`, `NoFactura`, `MetodoPago`, `IDProveedor`, `EstadoDeCompra`, `IDUsuario`, `IDTarjeta`, `IDMaquina`, `IDMina`, `FechaRequerido`, `FechaPedido`, `FechaEnviado`, `FechaRecibido`) VALUES
+(5, 4, 'Filtro para el que esta en la mina', 2, 750, 'SRWSFG321', 'Efectivo', 4, 'Recibido', 1, 0, 7, 4, '0000-00-00', '0000-00-00', '0000-00-00', '2015-07-17'),
+(6, 4, 'Las dos de atras', 2, 1500, 'SRWSFG321', 'Efectivo', 4, 'Recibido', 0, 3, 16, 4, '0000-00-00', '0000-00-00', '0000-00-00', '2015-06-29'),
+(7, 4, 'la del radio', 1, 15, 'eTDER234FDS', 'Efectivo', 4, 'Enviado', 0, 3, 16, 4, '0000-00-00', '0000-00-00', '2015-07-02', '0000-00-00'),
+(8, 4, 'Las dos delanteras', 2, 1500, 'SRWSFGE2', 'Efectivo', 4, 'Pedido', 0, 3, 16, 4, '2015-06-29', '2015-07-02', '0000-00-00', '0000-00-00'),
+(9, 2, 'Filtro para el D8', 4, 1000, 'NUMERO12345', 'Tarjeta', 3, 'Enviado', 1, 3, 6, 1, '2015-07-03', '2015-07-17', '2015-07-17', '0000-00-00'),
+(10, 2, 'comentario', 1, 15, '1234567gfdsa', 'Efectivo', 4, 'Requerido', 1, 3, 5, 1, '2015-07-17', '0000-00-00', '0000-00-00', '2015-07-17'),
+(11, 4, 'comentarios;  mas comentarios ', 5, 255, '123456ikjhgfds', 'Efectivo', 4, 'Recibido', 2, 0, 18, 1, '2015-07-17', '2015-07-17', '2015-07-17', '2015-07-17');
 
 -- --------------------------------------------------------
 
@@ -77,18 +79,21 @@ CREATE TABLE IF NOT EXISTS `inventario` (
 
 CREATE TABLE IF NOT EXISTS `maquinas` (
   `ID` int(11) NOT NULL,
-  `Descripcion` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+  `Descripcion` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `numeroEconomico` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `maquinas`
 --
 
-INSERT INTO `maquinas` (`ID`, `Descripcion`) VALUES
-(5, 'SuperDuty 2010 gris'),
-(6, 'Lobo 1999 Negra'),
-(7, 'Tsuru 2015 blanco'),
-(16, 'Pontiac Sunfire 1999');
+INSERT INTO `maquinas` (`ID`, `Descripcion`, `numeroEconomico`) VALUES
+(5, 'SuperDuty 2010 gris', 1),
+(6, 'Lobo 1999 Negra', 2),
+(7, 'Tsuru 2015 blanco', 3),
+(16, 'Pontiac Sunfire 1998', 4),
+(17, 'D8', 5),
+(18, 'Mitsubishi 2015 blanca', 6);
 
 -- --------------------------------------------------------
 
@@ -142,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `proveedores` (
   `ID` int(11) NOT NULL,
   `RFC` varchar(13) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
   `Nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `proveedores`
@@ -161,7 +166,7 @@ INSERT INTO `proveedores` (`ID`, `RFC`, `Nombre`) VALUES
 CREATE TABLE IF NOT EXISTS `tarjetas` (
   `ID` int(11) NOT NULL,
   `Descripcion` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tarjetas`
@@ -183,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `perfil` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -192,7 +197,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`ID`, `perfil`, `username`, `password`) VALUES
 (1, 'Administrador', 'saul@ganti.com.mx', 'b1b3773a05c0ed0176787a4f1574ff0075f7521e'),
 (2, 'Compras', 'contactanos@ganti.com.mx', 'b1b3773a05c0ed0176787a4f1574ff0075f7521e'),
-(3, 'Usuario', 'impresora@ganti.com.mx', 'b1b3773a05c0ed0176787a4f1574ff0075f7521e');
+(3, 'Usuario', 'impresora@ganti.com.mx', 'b1b3773a05c0ed0176787a4f1574ff0075f7521e'),
+(4, 'Administrador', 'saul.elchapo@gmail.com', 'b1b3773a05c0ed0176787a4f1574ff0075f7521e');
 
 -- --------------------------------------------------------
 
@@ -206,16 +212,18 @@ CREATE TABLE IF NOT EXISTS `usos` (
   `IDProducto` int(11) NOT NULL,
   `Cantidad` int(3) NOT NULL,
   `IDUsuario` int(11) NOT NULL,
+  `RecibidoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `Fecha` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usos`
 --
 
-INSERT INTO `usos` (`ID`, `IDMina`, `IDProducto`, `Cantidad`, `IDUsuario`, `Fecha`) VALUES
-(3, 4, 3, 3, 1, '2015-06-23'),
-(4, 1, 2, 3, 1, '2015-06-03');
+INSERT INTO `usos` (`ID`, `IDMina`, `IDProducto`, `Cantidad`, `IDUsuario`, `RecibidoPor`, `Fecha`) VALUES
+(3, 4, 3, 3, 2, 'Candido', '2015-06-23'),
+(4, 1, 2, 3, 1, 'Hugo', '2015-06-03'),
+(5, 1, 3, 2, 2, 'Hugo', '2015-07-17');
 
 --
 -- Índices para tablas volcadas
@@ -226,6 +234,12 @@ INSERT INTO `usos` (`ID`, `IDMina`, `IDProducto`, `Cantidad`, `IDUsuario`, `Fech
 --
 ALTER TABLE `compras`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  ADD PRIMARY KEY (`IDMina`);
 
 --
 -- Indices de la tabla `maquinas`
@@ -277,12 +291,12 @@ ALTER TABLE `usos`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `minas`
 --
@@ -297,22 +311,22 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tarjetas`
 --
 ALTER TABLE `tarjetas`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(30) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID` int(30) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `usos`
 --
 ALTER TABLE `usos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

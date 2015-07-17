@@ -18,7 +18,10 @@ class Maquinas extends CI_Controller
 
     public  function insertar()
     {
-        $maquina = array('Descripcion' => $this->input->post('Descripcion'));
+        $maquina = array(
+            'Descripcion' => $this->input->post('Descripcion'),
+            'numeroEconomico' => $this->input->post('numeroEconomico')
+        );
        if($this->maquinas_model->insertar($maquina))
            redirect('maquinas');
     }
@@ -47,7 +50,8 @@ class Maquinas extends CI_Controller
 
     public function actualizar(){
         $maquina = array(
-            'Descripcion' => $this->input->post('Descripcion')
+            'Descripcion' => $this->input->post('Descripcion'),
+            'numeroEconomico' => $this->input->post('numeroEconomico')
         );
         $id = $this->input->post('ID');
 
