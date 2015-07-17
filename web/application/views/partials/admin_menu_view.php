@@ -46,13 +46,13 @@
                     <a href="admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="compras"><i class="fa fa-shopping-cart fa-fw"></i> Compras</a>
+                    <a href="compras"><i class="fa fa-shopping-cart fa-fw"></i> Requisiciones</a>
                 </li>
                 <li>
                     <a href="maquinas"><i class="fa fa-cogs fa-fw"></i> Maquinas</a>
                 </li>
                 <li>
-                    <a href="minas"><i class="fa fa-compass fa-fw"></i> Minas</a>
+                    <a href="minas"><i class="fa fa-compass fa-fw"></i> Departamentos</a>
                 </li>
                 <li>
                     <a href="productos"><i class="fa fa-cubes fa-fw"></i> Productos</a>

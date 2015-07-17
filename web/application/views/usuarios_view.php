@@ -60,7 +60,7 @@ if (isset($actualizarUsuario)) {
                         </div>
                             <div class="col-sm-4">
                                 <label for="password">password:</label>
-                                <input type="text" class="form-control" id="password" name="password"
+                                <input type="password" class="form-control" id="password" name="password"
                                        value="<?php echo $password ?>"/>
                             </div>
                             <div class="clearfix"></div>

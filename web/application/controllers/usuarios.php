@@ -18,7 +18,7 @@ class Usuarios extends CI_Controller {
         $usuario = array(
             'perfil' => $this->input->post('perfil'),
             'username' => $this->input->post('username'),
-            'password' => sha1($this->input->post('username')),
+            'password' => sha1($this->input->post('password')),
         );
         if($this->usuarios_model->insertar($usuario))
             redirect('usuarios');
@@ -48,8 +48,9 @@ class Usuarios extends CI_Controller {
 
     public function actualizar(){
         $usuario = array(
-            'Clave' => $this->input->post('Clave'),
-            'Descripcion' => $this->input->post('Descripcion')
+            'perfil' => $this->input->post('perfil'),
+            'username' => $this->input->post('username'),
+            'password' => sha1($this->input->post('password')),
         );
         $id = $this->input->post('ID');
 

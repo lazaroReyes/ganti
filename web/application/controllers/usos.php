@@ -23,6 +23,7 @@ class Usos extends CI_Controller
             'IDProducto' => $this->input->post('IDProducto'),
             'Cantidad' => $this->input->post('Cantidad'),
             'IDUsuario' => $this->input->post('IDUsuario'),
+            'RecibidoPor' => $this->input->post('RecibidoPor'),
             'Fecha' => $this->input->post('Fecha'),
         );
         if($this->usos_model->insertar($uso))
@@ -63,6 +64,7 @@ class Usos extends CI_Controller
             'IDProducto' => $this->input->post('IDProducto'),
             'Cantidad' => $this->input->post('Cantidad'),
             'IDUsuario' => $this->input->post('IDUsuario'),
+            'RecibidoPor' => $this->input->post('RecibidoPor'),
             'Fecha' => $this->input->post('Fecha'),
         );
         $id = $this->input->post('ID');

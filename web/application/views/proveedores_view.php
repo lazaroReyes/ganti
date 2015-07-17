@@ -22,7 +22,7 @@ if(isset($actualizarProveedor)){
 }
 ?>
 <body>
-<?php if($this->session->userdata('perfil')=='Administrador'){?>
+<?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
 <form action="<?php echo base_url();?>proveedores/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <p><label>RFC:</label><input type="text" name="RFC" value="<?php echo $RFC?>"/></p>

@@ -10,14 +10,13 @@ if (isset($actualizarCompra)) {
     $IDProveedor = $actualizarCompra->IDProveedor;
     $EstadoDeCompra = $actualizarCompra->EstadoDeCompra;
     $IDUsuario = $actualizarCompra->IDUsuario;
-    $EstadoDePago = $actualizarCompra->EstadoDePago;
     $IDTarjeta = $actualizarCompra->IDTarjeta;
     $IDMaquina = $actualizarCompra->IDMaquina;
     $IDMina = $actualizarCompra->IDMina;
     $FechaRequerido = $actualizarCompra->FechaRequerido;
     $FechaPedido = $actualizarCompra->FechaPedido;
-    $FechaEntregaDeProveedor = $actualizarCompra->FechaEntregaDeProveedor;
     $FechaEnviado = $actualizarCompra->FechaEnviado;
+    $FechaRecibido = $actualizarCompra->FechaRecibido;
     $action = 'actualizar';
     $button = 'Actualizar';
 } else {
@@ -31,14 +30,13 @@ if (isset($actualizarCompra)) {
     $IDProveedor = '';
     $EstadoDeCompra = '';
     $IDUsuario = '';
-    $EstadoDePago = '';
     $IDTarjeta = '';
     $IDMaquina = '';
     $IDMina = '';
     $FechaRequerido = '';
     $FechaPedido = '';
-    $FechaEntregaDeProveedor = '';
     $FechaEnviado = '';
+    $FechaRecibido = '';
     $action = 'insertar';
     $button = 'Guardar';
 }
@@ -48,202 +46,242 @@ if (isset($actualizarCompra)) {
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Compras</h1>
+                <h1 class="page-header">Requisiciones</h1>
 
                 <div class="divider"></div>
                     <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                         <form action="<?php echo base_url(); ?>compras/<?php echo $action; ?>" method="post" class="margin-bottom">
                             <?php echo $ID; ?>
-                            <div class="form-group">
-                                <div class="col-sm-4">
-                                    <label for="IDProdcto">Seleccionar Producto:</label>
-                                    <select id="IDProdcto" name="IDProducto" class="form-control">
-                                        <?php foreach ($productosGuardados as $producto) :
-                                            if ($producto->ID == $IDProducto) {
-                                                ?>
-                                                <option selected
-                                                        value="<?php echo $producto->ID?>"><?php echo $producto->Descripcion?></option>
-                                            <?php } else { ?>
-                                                <option
-                                                    value="<?php echo $producto->ID ?>"><?php echo $producto->Descripcion ?></option>
-                                            <?php } endforeach; ?>
+                            <?php if ($ID == ''){?>
+                            <div class="col-sm-4">
+                                <label for="IDMina">Departamento:</label>
+                                <select name="IDMina" id="IDMina" class="form-control">
+                                <?php foreach ($minasGuardadas as $mina) : ?>
+                                    <option value="<?php echo $mina->ID ?>"><?php echo $mina->Nombre ?></option>
+                                <?php endforeach; ?>
                                     </select>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="Descripcion">Descripcion:</label>
-                                    <input type="text" class="form-control" id="Descripcion" name="Descripcion"
-                                           value="<?php echo $Descripcion ?>"/>
-                                </div>
-                                <div class="col-sm-4">
+                                    </div>
+                            <div class="col-sm-4">
+                                <label for="IDMaquina">Maquina:</label>
+                                    <select name="IDMaquina" id="IDMaquina" class="form-control">
+                                        <?php foreach ($maquinasGuardadas as $maquina) : ?>
+                                                <option value="<?php echo $maquina->ID ?>"><?php echo $maquina->Descripcion ?></option>
+                                        <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="IDProducto">Seleccionar Producto:</label>
+                                    <select id="IDProducto" name="IDProducto" class="form-control">
+                                        <?php foreach ($productosGuardados as $producto) : ?>
+                                                <option value="<?php echo $producto->ID ?>"><?php echo $producto->Clave ?>----<?php echo $producto->Descripcion ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                            </div>
+                                <div class="clearfix"></div>
+                                <div class="col-sm-6">
                                     <label for="Cantidad">Cantidad:</label>
                                     <input type="text" class="form-control" id="Cantidad" name="Cantidad"
                                            value="<?php echo $Cantidad ?>"/>
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="Descripcion">Comentarios:</label>
+                                    <input type="text" class="form-control" id="Descripcion" name="Descripcion"
+                                           value="<?php echo $Descripcion ?>"/>
+                                </div>
                                 <div class="clearfix"></div>
-                            </div>
-                            <div class="form-group">
+                                <input type="hidden" name="EstadoDeCompra" value="Requerido">
+                                <input type="hidden" name="IDUsuario" value="<?= $this->session->userdata('id_usuario') ?>">
+                            <?php } else { ?>
+                                <input type="hidden" name="IDUsuario" value="<?= $this->session->userdata('id_usuario') ?>">
                                 <div class="col-sm-4">
-                                    <label for="Costo">Costo total:</label>
-                                    <input type="text" class="form-control" id="Costo" name="Costo"
-                                           value="<?php echo $Costo ?>"/>
+                                    <label for="IDMina">Departamento:</label>
+                                    <?php foreach ($minasGuardadas as $minas) :  if ($IDMina == $minas->ID) { ?>
+                                    <input type="hidden" name="IDMina" id="IDMina" class="form-control"
+                                           value="<?php echo $IDMina ?>"/><?php echo $minas->Nombre;
+                                        break;
+                                    } endforeach; ?>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="NoFactura">No. Factura:</label>
-                                    <input type="text" id="NoFactura" class="form-control" name="NoFactura"
-                                           value="<?php echo $NoFactura ?>"/>
+                                    <label for="IDProducto">Producto:</label>
+                                    <?php foreach ($productosGuardados as $productos) :  if ($IDProducto == $productos->ID) { ?>
+                                        <input type="hidden" name="IDProducto" id="IDProducto" class="form-control"
+                                               value="<?php echo $IDProducto ?>"/><?php echo $productos->Clave.'---'.$productos->Descripcion;
+                                        break;
+                                    } endforeach; ?>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="MDP">Seleccione metodo de pago:</label>
-                                    <select class="form-control" name="MetodoPago" id="MDP" onChange="ver()">
-                                        <?php if ($MetodoPago == 'Tarjeta') { ?>
-                                            <option value="Tarjeta">Tarjeta</option>
-                                            <option value="Efectivo">Efectivo</option>
-                                        <?php } else { ?>
-                                            <option value="Efectivo">Efectivo</option>
-                                            <option value="Tarjeta">Tarjeta</option>
+                                    <label for="IDMaquina">Maquina:</label>
+                                    <?php foreach ($maquinasGuardadas as $maquina) :  if ($IDMaquina == $maquina->ID) { ?>
+                                        <input type="hidden" name="IDMaquina" id="IDMaquina" class="form-control"
+                                               value="<?php echo $IDMaquina ?>"/><?php echo $maquina->Descripcion.'---#'.$maquina->numeroEconomico;
+                                        break;
+                                    } endforeach; ?>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="Cantidad">Cantidad:</label>
+                                    <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
+                                        <input type="hidden" name="Cantidad" id="Cantidad" class="form-control"
+                                               value="<?php echo $Cantidad ?>"/> <?php echo $Cantidad ?>
+                                    <?php }else { ?>
+                                    <input type="text" class="form-control" id="Cantidad" name="Cantidad"
+                                           value="<?php echo $Cantidad ?>"/>
+                                    <?php } ?>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <label for="Costo">Costo total:</label>
+                                        <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
+                                            <input type="hidden" name="Costo" id="Costo" class="form-control"
+                                                   value="<?php echo $Costo ?>"/> <?php echo $Costo ?>
+                                        <?php }else { ?>
+                                        <input type="text" class="form-control" id="Costo" name="Costo"
+                                               value="<?php echo $Costo ?>"/>
                                         <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="form-group">
-                                <div <?php  if($EstadoDeCompra == ''){ echo 'class="col-sm-6"'; }else { echo 'class="col-sm-4"'; }?>>
-                                    <label for="IDProveedor">Seleccione Proveedor:</label>
-                                    <select class="form-control" id="IDProveedor" name="IDProveedor">
-                                        <?php foreach ($proveedoresGuardados as $provedor) :
-                                            if ($provedor->ID == $IDProveedor) {
-                                                ?>
-                                                <option selected
-                                                        value="<?php echo $provedor->ID?>"><?php echo $provedor->Nombre?></option>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="NoFactura">No. Factura:</label>
+                                        <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
+                                            <input type="hidden" name="NoFactura" id="NoFactura" class="form-control"
+                                                   value="<?php echo $NoFactura ?>"/> <?php echo $NoFactura ?>
+                                        <?php }else { ?>
+                                        <input type="text" id="NoFactura" class="form-control" name="NoFactura"
+                                               value="<?php echo $NoFactura ?>"/>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
+                                            <label for="MDP">Metodo de pago:</label>
+                                            <input type="hidden" name="MetodoPago" id="MetodoPago" class="form-control"
+                                                   value="<?php echo $MetodoPago ?>"/> <?php echo $MetodoPago ?>
+                                        <?php }else { ?>
+                                        <label for="MDP">Seleccione metodo de pago:</label>
+                                        <select class="form-control" name="MetodoPago" id="MDP" onChange="ver()">
+                                            <?php if ($MetodoPago == 'Tarjeta') { ?>
+                                                <option value="Tarjeta">Tarjeta</option>
+                                                <option value="Efectivo">Efectivo</option>
                                             <?php } else { ?>
-                                                <option
-                                                    value="<?php echo $provedor->ID ?>"><?php echo $provedor->Nombre ?></option>
-                                            <?php } endforeach; ?>
-                                    </select>
+                                                <option value="Efectivo">Efectivo</option>
+                                                <option value="Tarjeta">Tarjeta</option>
+                                            <?php } } ?>
+                                        </select>
+                                    </div>
                                 </div>
-                                    <?php if ($EstadoDeCompra == '') {?>
-                                        <input type="hidden" name="EstadoDeCompra" value="Requerido"><?php
-                                    } else { ?>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <label for="IDTarjeta">Tarjeta:</label>
+                                        <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
+                                            <input type="hidden" name="IDTarjeta" id="IDTarjeta" class="form-control"
+                                                   value="<?php echo $IDTarjeta ?>"/> <?php echo $IDTarjeta  ?>
+                                        <?php }else { ?>
+                                        <select name="IDTarjeta" id="IDTarjeta" class="form-control">
+                                            <option value="Efectivo">Efectivo</option>
+                                            <?php foreach ($tarjetasGuardadas as $tarjeta) :
+                                                if ($tarjeta->ID == $IDTarjeta) {
+                                                    ?>
+                                                    <option selected
+                                                            value="<?php echo $tarjeta->ID?>"><?php echo $tarjeta->Descripcion?></option>
+                                                <?php } else { ?>
+                                                    <option
+                                                        value="<?php echo $tarjeta->ID ?>"><?php echo $tarjeta->Descripcion ?></option>
+                                                <?php } endforeach; }?>
+                                        </select>
+                                    </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
+                                            <label for="MDP">Metodo de pago:</label>
+                                        <?php foreach ($proveedoresGuardados as $proveedor) :
+                                        if ($proveedor->ID == $IDProveedor) {?>
+                                            <input type="hidden" name="IDProveedor" id="IDProveedor" class="form-control"
+                                                   value="<?php echo $IDProveedor ?>"/> <?php echo $proveedor->Nombre ?>
+                                        <?php } endforeach; } else { ?>
+                                        <label for="IDProveedor">Seleccione Proveedor:</label>
+                                        <select class="form-control" id="IDProveedor" name="IDProveedor">
+                                            <?php foreach ($proveedoresGuardados as $proveedor) :
+                                                if ($proveedor->ID == $IDProveedor) {
+                                                    ?>
+                                                    <option selected
+                                                            value="<?php echo $proveedor->ID?>"><?php echo $proveedor->Nombre?></option>
+                                                <?php } else { ?>
+                                                    <option
+                                                        value="<?php echo $proveedor->ID ?>"><?php echo $proveedor->Nombre ?></option>
+                                                <?php } endforeach; } ?>
+
+                                        </select>
+                                    </div>
                                         <div class="col-sm-4">
                                             <label for="EstadoDeCompra">Estado de Compra:</label>
+                                            <?php if ($EstadoDeCompra == 'Recibido'){ ?>
+                                                <input type="hidden" name="EstadoDeCompra" id="EstadoDeCompra" class="form-control"
+                                                       value="<?php echo $EstadoDeCompra ?>"/> <?php echo $EstadoDeCompra ?>
+                                            <?php }else { ?>
                                             <select class="form-control" id="EstadoDeCompra" name="EstadoDeCompra">
                                                 <?php switch ($EstadoDeCompra) {
                                                     case 'Requerido': ?>
                                                         <option value="Requerido">Requerido</option>
                                                         <option value="Pedido">Pedido</option>
-                                                        <option value="Entregado por proveedor">Entregado por el proveedor
+                                                        <option value="Enviado">Enviado
                                                         </option>
-                                                        <option value="Enviado">Enviado</option>
+                                                        <option value="Recibido">Recibido</option>
                                                         <?php break;
                                                     case 'Pedido': ?>
                                                         <option value="Pedido">Pedido</option>
-                                                        <option value="Entregado por proveedor">Entregado por el proveedor
+                                                        <option value="Enviado">Enviado
                                                         </option>
-                                                        <option value="Enviado">Enviado</option>
-                                                        <?php break;
-                                                    case 'Entregado por proveedor': ?>
-                                                        <option value="Entregado por proveedor">Entregado por el proveedor
-                                                        </option>
-                                                        <option value="Enviado">Enviado</option>
+                                                        <option value="Recibido">Recibido</option>
                                                         <?php break;
                                                     case 'Enviado': ?>
-                                                        <option value="Enviado">Enviado</option>
+                                                        <option value="Enviado">Enviado
+                                                        </option>
+                                                        <option value="Recibido">Recibido</option>
                                                         <?php break;
-                                                } ?>
-                                        </select>
+                                                    case 'Recibido': ?>
+                                                        <option value="Recibido">Recibido</option>
+                                                        <?php break;
+                                                } }?>
+                                            </select>
                                         </div>
-                                    <?php } ?>
-                                <div <?php  if($EstadoDeCompra == ''){ echo 'class="col-sm-6"'; }else { echo 'class="col-sm-4"'; }?>>
-                                    <input type="hidden" name="IDUsuario"
-                                           value="<?= $this->session->userdata('id_usuario') ?>">
-                                    <label for="EstadoDePago">Estado de pago:</label>
-                                    <select name="EstadoDePago" id="EstadoDePago" class="form-control">
-                                        <?php if ($EstadoDePago == 'Pagado') { ?>
-                                            <option value="Pagado">Pagado</option>
-                                            <option value="Credito">Credito</option>
-                                        <?php } else { ?>
-                                            <option value="Credito">Credito</option>
-                                            <option value="Pagado">Pagado</option>
+                                    <div class="col-sm-4">
+                                        <label for="Descripcion">Comentarios:</label>
+                                        <?php if ($EstadoDeCompra == 'Recibido'){ ?>
+                                            <input type="hidden" name="Descripcion" id="Descripcion" class="form-control"
+                                                   value="<?php echo $Descripcion ?>"/> <?php echo $Descripcion ?>
+                                        <?php }else { ?>
+                                            <input type="text" class="form-control" id="Descripcion" name="Descripcion"
+                                                   value="<?php echo $Descripcion ?>"/>
                                         <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-4">
-                                    <label for="IDTarjeta">Tarjeta:</label>
-                                    <select name="IDTarjeta" id="IDTarjeta" class="form-control">
-                                        <option value="Efectivo">Efectivo</option>
-                                        <?php foreach ($tarjetasGuardadas as $tarjeta) :
-                                            if ($tarjeta->ID == $IDTarjeta) {
-                                                ?>
-                                                <option selected
-                                                        value="<?php echo $tarjeta->ID?>"><?php echo $tarjeta->Descripcion?></option>
-                                            <?php } else { ?>
-                                                <option
-                                                    value="<?php echo $tarjeta->ID ?>"><?php echo $tarjeta->Descripcion ?></option>
-                                            <?php } endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="IDMaquina">Maquina:</label>
-                                    <select name="IDMaquina" id="IDMaquina" class="form-control">
-                                        <?php foreach ($maquinasGuardadas as $maquina) :
-                                            if ($maquina->ID == $IDMaquina) {
-                                                ?>
-                                                <option selected
-                                                        value="<?php echo $maquina->ID?>"><?php echo $maquina->Descripcion?></option>
-                                            <?php } else { ?>
-                                                <option
-                                                    value="<?php echo $maquina->ID ?>"><?php echo $maquina->Descripcion ?></option>
-                                            <?php } endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="IDMina">Mina:</label>
-                                    <select name="IDMina" id="IDMina" class="form-control">
-                                        <?php foreach ($minasGuardadas as $mina) :
-                                            if ($mina->ID == $IDMina) {
-                                                ?>
-                                                <option selected
-                                                        value="<?php echo $mina->ID?>"><?php echo $mina->Nombre?></option>
-                                            <?php } else { ?>
-                                                <option
-                                                    value="<?php echo $mina->ID ?>"><?php echo $mina->Nombre ?></option>
-                                            <?php } endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <?php if ($ID != '') { ?>
-                                <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <label for="FechaRequerido">Fecha Requerido:</label>
-                                        <input type="hidden" name="FechaRequerido" id="FechaRequerido"
-                                               class="form-control"
-                                               value="<?php echo $FechaRequerido ?>"/><?php echo $FechaRequerido ?>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label for="FechaPedido">Fecha Pedido:</label>
-                                        <input type="hidden" name="FechaPedido" id="FechaPedido" class="form-control"
-                                               value="<?php echo $FechaPedido ?>"/><?php echo $FechaPedido ?>
-                                    </div>
+                                </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <label for="FechaEntregaDeProveedor">Fecha Entregado por proveedor:</label>
-                                        <input type="hidden" name="FechaEntregaDeProveedor" id="FechaEntregaDeProveedor"
-                                               class="form-control"
-                                               value="<?php echo $FechaEntregaDeProveedor ?>"/><?php echo $FechaEntregaDeProveedor ?>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label for="FechaRequerido">Fecha Requerido:</label>
+                                            <input type="hidden" name="FechaRequerido" id="FechaRequerido"
+                                                   class="form-control"
+                                                   value="<?php echo $FechaRequerido ?>"/><?php echo $FechaRequerido ?>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="FechaPedido">Fecha Pedido:</label>
+                                            <input type="hidden" name="FechaPedido" id="FechaPedido" class="form-control"
+                                                   value="<?php echo $FechaPedido ?>"/><?php echo $FechaPedido ?>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label for="FechaEnviado">Fecha Enviado:</label>
-                                        <input type="hidden" name="FechaEnviado" id="FechaEnviado" class="form-control"
-                                               value="<?php echo $FechaEnviado ?>"/><?php echo $FechaEnviado ?>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label for="FechaEnviado">Fecha Enviado:</label>
+                                            <input type="hidden" name="FechaEnviado" id="FechaEnviado"
+                                                   class="form-control"
+                                                   value="<?php echo $FechaEnviado ?>"/><?php echo $FechaEnviado ?>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="FechaRecibido">Fecha Recibido:</label>
+                                            <input type="hidden" name="FechaRecibido" id="FechaRecibido" class="form-control"
+                                                   value="<?php echo $FechaRecibido ?>"/><?php echo $FechaRecibido ?>
+                                        </div>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                </div>
                             <?php } ?>
                             <div class="form-group">
                                 <div class="col-sm-4" aria-hidden="true"></div>
@@ -269,9 +307,9 @@ if (isset($actualizarCompra)) {
                         <?php if (count($comprasGuardados) > 0): ?>
                             <table class="table table-striped table-condensed">
                                 <thead>
-                                <th>Compra</th>
+                                <th>Requisición</th>
                                 <th>Producto</th>
-                                <th>Descripción</th>
+                                <th>Comentarios</th>
                                 <th>Cantidad</th>
                                 <th>Costo</th>
                                 <th>No. Factura</th>
@@ -279,18 +317,18 @@ if (isset($actualizarCompra)) {
                                 <th>Proveedor</th>
                                 <th>Estado de la compra</th>
                                 <th>Usuario</th>
-                                <th>Estado de pago</th>
                                 <th>Tarjeta</th>
                                 <th>Maquina</th>
-                                <th>Mina</th>
+                                <th>Departamento</th>
                                 <th>Fecha de requisición</th>
                                 <th>Fecha del pedido</th>
-                                <th>Fecha entrega del proveedor</th>
                                 <th>Fecha enviado</th>
+                                <th>Fecha recibido</th>
                                 <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                                     <th class="text-center">Editar</th>
+                                <?php if ($this->session->userdata('perfil') == 'Administrador'){?>
                                     <th class="text-center">Eliminar</th>
-                                <?php } ?>
+                                <?php }} ?>
                                 </thead>
                                 <tbody>
                                 <?php foreach ($comprasGuardados as $compra) : ?>
@@ -314,7 +352,6 @@ if (isset($actualizarCompra)) {
                                                 echo $usuarios->username;
                                                 break;
                                             } endforeach; ?></td>
-                                        <td><?php echo $compra->EstadoDePago; ?></td>
                                         <td><?php foreach ($tarjetasGuardadas as $tarjeta) : if ($compra->IDTarjeta == $tarjeta->ID) {
                                                 echo $tarjeta->Descripcion;
                                                 break;
@@ -329,22 +366,23 @@ if (isset($actualizarCompra)) {
                                             } endforeach; ?></td>
                                         <td><?php echo $compra->FechaRequerido; ?></td>
                                         <td><?php echo $compra->FechaPedido; ?></td>
-                                        <td><?php echo $compra->FechaEntregaDeProveedor; ?></td>
                                         <td><?php echo $compra->FechaEnviado; ?></td>
+                                        <td><?php echo $compra->FechaRecibido; ?></td>
                                         <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                                             <td class="text-center">
                                                 <a href="<?php echo base_url(); ?>compras/index/<?php echo $compra->ID; ?>"><i class="fa fa-pencil-square-o"></i></a>
                                             </td>
+                                        <?php if ($this->session->userdata('perfil') == 'Administrador'){?>
                                             <td class="text-center">
                                                 <a href="<?php echo base_url(); ?>compras/eliminar/<?php echo $compra->ID; ?>"><i class="fa fa-times"></i></a>
                                             </td>
-                                        <?php } ?>
+                                        <?php }} ?>
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>
                             </table>
                         <?php else : ?>
-                        <h2>no hay compras registrados</h2>
+                        <h2>no hay requisiciones registrados</h2>
                             <?php endif; ?>
                     </div>
             </div>

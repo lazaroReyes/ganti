@@ -20,7 +20,7 @@ if(isset($actualizarTarjeta)){
 }
 ?>
 <body>
-<?php if($this->session->userdata('perfil')=='Administrador'){?>
+<?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
 <form action="<?php echo base_url();?>tarjetas/<?php echo $action;?>" method="post">
     <?php echo $ID; ?>
     <p><label>Descripcion:</label><input type="text" name="Descripcion" value="<?php echo $Descripcion?>"/></p>
