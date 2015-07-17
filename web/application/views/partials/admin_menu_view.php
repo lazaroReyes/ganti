@@ -19,10 +19,10 @@
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="#"><i class="fa fa-user fa-fw"></i> <?= $this->session->userdata('perfil') ?></a>
                 </li>
-                <li><a href="#"><i class="fa fa-cog fa-fw"></i> Configuración</a>
+                <li><a href="#"><i class="fa fa-cog fa-fw"></i> Configurar</a>
                 </li>
                 <li class="divider"></li>
-                <li><?=anchor('login/logout_ci', '<i class="fa fa-sign-out fa-fw"></i> Logout') ?>
+                <li><?=anchor('login/logout_ci', '<i class="fa fa-sign-out fa-fw"></i> Salir') ?>
                 </li>
             </ul>
             <!-- /.dropdown-user -->

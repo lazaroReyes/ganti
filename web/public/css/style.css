@@ -64,6 +64,10 @@
     height: 100%;
 }
 
+a {
+    color: #262626 !important;
+}
+
 /* MISC */
 body {
     background-color: #fff;
