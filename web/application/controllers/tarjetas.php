@@ -40,7 +40,9 @@ class Tarjetas extends CI_Controller
             $data['actualizarTarjeta'] = $this->tarjetas_model->consultaTarjeta($id);
         }
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('tarjetas_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){

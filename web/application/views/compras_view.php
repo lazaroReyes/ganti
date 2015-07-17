@@ -49,7 +49,6 @@ if (isset($actualizarCompra)) {
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Compras</h1>
-
                 <div class="divider"></div>
                     <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                         <form action="<?php echo base_url(); ?>compras/<?php echo $action; ?>" method="post" class="margin-bottom">

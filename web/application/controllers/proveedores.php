@@ -42,7 +42,9 @@ class Proveedores extends CI_Controller
             $data['actualizarProveedor'] = $this->proveedores_model->consultaProveedor($id);
         }
 
+        $this->load->view('partials/header_view', $data);
         $this->load->view('proveedores_view',$data);
+        $this->load->view('partials/footer_view');
     }
 
     public function actualizar(){
