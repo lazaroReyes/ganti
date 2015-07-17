@@ -46,12 +46,7 @@ if (isset($actualizarCompra)) {
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-<<<<<<< HEAD
-                <h1 class="page-header">Compras</h1>
-=======
                 <h1 class="page-header">Requisiciones</h1>
-
->>>>>>> 106b09c9d2f0096ea3f42baec8822ce546c0138b
                 <div class="divider"></div>
                     <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                         <form action="<?php echo base_url(); ?>compras/<?php echo $action; ?>" method="post" class="margin-bottom">
