@@ -3,10 +3,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'ganti';
+$db['default']['hostname'] = 'ganticommx.ipagemysql.com';
+$db['default']['username'] = 'ganticommx';
+$db['default']['password'] = 'Ganti2015.';
+$db['default']['database'] = 'ganti_admin1';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
