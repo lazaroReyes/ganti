@@ -1,0 +1,271 @@
+/** 
+*    STYLESHEET
+*    Company:  Ganti caminos y construcciones
+*    Website:  ganti.com.mx
+*    Author:   Lázaro Reyes
+*    Version: 1.0.0
+*/
+
+/** FONTS **/
+@font-face {
+    font-family: 'Gotham-Light';
+    src: url('../fonts/Gotham-Light_0.otf');
+}
+
+@font-face {
+    font-family: 'Gotham-Black'; /*a name to be used later*/
+    src: url('../fonts/Gotham-Black_0.otf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Gotham-Thin'; /*a name to be used later*/
+    src: url('../fonts/Gotham-Thin_0.otf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Gotham-XLight'; /*a name to be used later*/
+    src: url('../fonts/Gotham-XLight_0.otf'); /*URL to font*/
+}
+
+/** NAVBAR **/
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    font-weight: 200;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.navbar-inverse .navbar-nav > li > a.active, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #EC1C24;
+    text-decoration: none;
+}
+    
+
+.navbar-brand {
+    padding: 5px 15px;
+}
+
+/** CAROUSEL **/
+.carousel .item {
+    min-width: 100%;
+    background-color: #fff;
+}
+
+.carousel-inner > .item > img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.carousel-indicators {
+    bottom: 5px;
+}
+
+.carousel-indicators li {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.carousel-indicators li.active {
+    width: 15px;
+    height: 15px;
+    background-color: #C8161C;
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+    color: #EC1C24;
+}
+
+/** BACKGROUND **/
+.bg-white {
+    background-color: #fff !important;
+    color: #404042 !important;
+    font-family: 'Gotham-Light';
+}
+.bg-gray {
+    background-color: #404042;
+    color: #f3f3f3;
+    font-family: 'Gotham-Thin';
+    
+}
+
+.bg-red {
+    background-color: #a7141a;
+    color: #fff;
+    font-family: 'Gotham-Light';
+}
+
+.bg-img {
+    background-image: url('../img/background.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
+
+.bg-img-circle {
+    background-image:url('../img/background-circle.png');
+    background-repeat: no-repeat;
+    background-position: -28% 50%;
+}
+
+/** SECTIONS **/
+.bg-white h2, .bg-gray h2, .bg-red h2 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #ED1C24;
+}
+
+.bg-white p {
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 16px;
+}
+
+.bg-gray h2 {
+    color: #f3f3f3;
+    margin-bottom: 30px;
+}
+
+.bg-gray p {
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    text-align: justify;
+    
+}
+
+.bg-gray i {
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 36px;
+}
+
+.bg-red h2 {
+    color: #fff;
+    margin-bottom: 50px;
+}
+
+.bg-red .img-circle {
+    border: 5px solid #000;
+}
+
+.bg-red p {
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+/** FORM **/
+.form-control {
+    background-color: #404042;
+    color: #fff;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+.red-submit {
+    width: 80%;
+    background-color: #ed1c24;
+    color: #fff;
+    padding: 15px;
+}
+
+.red-submit:hover, .red-submit:focus, .red-submit:active {
+    background-color: #b11a20;
+    color: #fff;
+}
+
+/** FOOTER **/
+footer {
+    padding-top: 30px;
+    background-color: #222222;
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Gotham-XLight'
+}
+
+footer h3, footer p {
+    text-align: center;
+}
+
+footer p {
+    margin-top: 30px;
+}
+
+footer h5 {
+    text-align: center;
+    background-color: #ed1c24;
+    margin: 30px 0;
+    padding: 10px 0;
+}
+
+
+/** MISC **/
+body {
+    overflow-x: hidden;
+    color: #fff;
+    font-family: 'Gotham-Black';
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #404042;
+    padding-top: 50px;
+}
+
+#ganti, #nosotros, #servicios, #contacto {
+    padding-top: 50px;
+}
+
+.margin-bottom {
+    margin-bottom: 30px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.full-box {
+    padding: 100px 0;
+}
+
+#googleMap {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+/** MEDIA QUERY **/
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) { 
+    .red-submit {
+        width: 100%;
+    }
+    
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .bg-gray p {
+        text-align: center;
+    }
+    
+    .no-padding-lr{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {  }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
