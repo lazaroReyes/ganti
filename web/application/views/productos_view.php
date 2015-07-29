@@ -3,12 +3,14 @@ if(isset($actualizarProducto)){
     $ID = '<p><input type="hidden" name="ID" value="'.$this->uri->segment(3).'"></p>';
     $Clave = $actualizarProducto->Clave;
     $Descripcion = $actualizarProducto->Descripcion;
+    $Stock = $actualizarProducto->Stock;
     $action = 'actualizar';
     $button = 'Actualizar';
 }else{
     $ID = '';
     $Clave = '';
     $Descripcion='';
+    $Stock = '';
     $action = 'insertar';
     $button = 'Guardar';
 }
@@ -19,10 +21,9 @@ if(isset($actualizarProducto)){
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Productos</h1>
-
                     <div class="divider"></div>
                     <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
-                        <form action="<?php echo base_url();?>productos/<?php echo $action;?>" method="post" class="margin-bottom">
+                        <?php echo form_open("productos/$action", 'method="post" class="margin-bottom"'); ?>
                             <?php echo $ID; ?>
                             <div class="form-group">
                                 <div class="col-sm-6">
@@ -33,6 +34,12 @@ if(isset($actualizarProducto)){
                                     <label for="Descripcion">Descripcion:</label>
                                     <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="<?php echo $Descripcion?>"/>
                                 </div>
+                                    <?php if($ID!=''){?>
+                                    <div class="col-sm-6">
+                                    <label for="Stock">Stock:</label>
+                                    <input type="hidden" class="form-control" id="Stock" name="Stock" value="<?php echo $Stock?>"/><?php echo $Stock ?>
+                                </div>
+                                <?php } ?>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
@@ -48,7 +55,7 @@ if(isset($actualizarProducto)){
                                 <?php
                             }
                             ?>
-                        </form>
+                        <?php echo form_close(); ?>
                     <?php } ?>
                     <div class="divider"></div>
                     <div class="col-lg-12 table-responsive">
@@ -58,6 +65,7 @@ if(isset($actualizarProducto)){
                             <th>Producto</th>
                             <th>Clave</th>
                             <th>Descripción</th>
+                            <th>Stock</th>
                             <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
                             <th class="text-center">Editar</th>
                             <?php if ($this->session->userdata('perfil') == 'Administrador'){?>
@@ -70,6 +78,7 @@ if(isset($actualizarProducto)){
                                     <td><?php echo $producto->ID; ?></td>
                                     <td><?php echo $producto->Clave; ?></td>
                                     <td><?php echo $producto->Descripcion; ?></td>
+                                    <td><?php echo $producto->Stock; ?></td>
                                     <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil') == 'Compras'){?>
                                         <td class="text-center"><a href="<?php echo base_url(); ?>productos/index/<?php echo $producto->ID; ?>"><i class="fa fa-pencil-square-o"></i></a></td>
                                     <?php if ($this->session->userdata('perfil') == 'Administrador'){?>

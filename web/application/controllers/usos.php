@@ -26,6 +26,12 @@ class Usos extends CI_Controller
             'RecibidoPor' => $this->input->post('RecibidoPor'),
             'Fecha' => $this->input->post('Fecha'),
         );
+
+            $this->load->model('productos_model');
+            $producto = $this->productos_model->consultaProducto($uso['IDProducto']);
+            $producto->Stock = $producto->Stock - $uso['Cantidad'];
+            $this->productos_model->actualizarProducto($uso['IDProducto'], $producto);
+
         if($this->usos_model->insertar($uso))
             redirect('usos');
     }

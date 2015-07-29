@@ -103,13 +103,18 @@ class Compras extends CI_Controller
         }else{
             $compra['FechaRecibido'] = date("Y")."-".date("m")."-".date("d");
         }
-        $id = $this->input->post('ID');{
-
-        }
+        $id = $this->input->post('ID');
 
         $this->load->model('compras_model');
         if($this->compras_model->actualizarCompra($id, $compra))
             $this->session->set_flashdata('actualizado','La compra se actualizó correctamente');
+
+        if ($compra['EstadoDeCompra']=='Recibido'){
+            $this->load->model('productos_model');
+            $producto = $this->productos_model->consultaProducto($compra['IDProducto']);
+            $producto->Stock = $producto->Stock + $compra['Cantidad'];
+            $this->productos_model->actualizarProducto($compra['IDProducto'], $producto);
+        }
         redirect('compras');
     }
 

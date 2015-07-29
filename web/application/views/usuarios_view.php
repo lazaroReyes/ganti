@@ -22,8 +22,7 @@ if (isset($actualizarUsuario)) {
             <div class="col-lg-12">
                 <h1 class="page-header">Usuarios</h1>
                 <?php if ($this->session->userdata('perfil') == 'Administrador') { ?>
-                    <form action="<?php echo base_url(); ?>usuarios/<?php echo $action; ?>" method="post"
-                          class="margin-bottom">
+                    <?php echo form_open("usuarios/$action", 'method="post" class="margin-bottom"'); ?>
                         <?php echo $ID; ?>
                         <div class="form-group"
                             <div class="col-sm-4">
@@ -77,7 +76,7 @@ if (isset($actualizarUsuario)) {
                         if ($actualizar) { ?>
                             <span id="actualizadoCorrectamente"><?= $actualizar ?></span>
                         <?php } ?>
-                    </form>
+                    <?php echo form_close(); ?>
                 <div class="divider"></div>
                 <div class="col-lg-12 table-responsive">
                     <?php if (count($usuariosGuardadas) > 0): ?>

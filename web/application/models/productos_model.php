@@ -16,7 +16,7 @@ class Productos_model extends  CI_Model{
 
     public  function  leer(){
         $this->db->order_by('ID DESC');
-        $query = $this->db->get('Productos');
+        $query = $this->db->get('productos');
         return $query->result();
     }
 

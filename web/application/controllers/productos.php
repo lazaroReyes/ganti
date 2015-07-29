@@ -20,7 +20,9 @@ class Productos extends CI_Controller
     {
         $producto = array(
             'Clave' => $this->input->post('Clave'),
-            'Descripcion' => $this->input->post('Descripcion'));
+            'Descripcion' => $this->input->post('Descripcion'),
+            'Stock' => $this->input->post('Stock')
+             );
         if($this->productos_model->insertar($producto))
             redirect('productos');
     }
@@ -50,7 +52,8 @@ class Productos extends CI_Controller
     public function actualizar(){
         $producto = array(
             'Clave' => $this->input->post('Clave'),
-            'Descripcion' => $this->input->post('Descripcion')
+            'Descripcion' => $this->input->post('Descripcion'),
+            'Stock' => $this->input->post('Stock')
         );
         $id = $this->input->post('ID');
 

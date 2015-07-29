@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://ganti.com.mx/admin/';
+$config['base_url']	= 'http://localhost/ganti/web/';
 
 /*
 |--------------------------------------------------------------------------

@@ -21,7 +21,7 @@ if (isset($actualizarMaquina)) {
                 <h1 class="page-header">Maquinas</h1>
                 <div class="divider"></div>
                 <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
-                    <form action="<?php echo base_url(); ?>maquinas/<?php echo $action; ?>" method="post" class="margin-bottom">
+                    <?php echo form_open("maquinas/$action", 'method="post" class="margin-bottom"'); ?>
                         <?php echo $ID; ?>
                         <div class="form-group">
                             <div class="col-sm-6">
@@ -47,7 +47,7 @@ if (isset($actualizarMaquina)) {
                         if ($actualizar) { ?>
                             <span id="actualizadoCorrectamente"><?= $actualizar ?></span>
                         <?php } ?>
-                    </form>
+                    <?php form_close(); ?>
                 <?php } ?>
                 <div class="divider"></div>
                 <div class="col-lg-12 table-responsive">

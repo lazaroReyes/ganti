@@ -16,7 +16,7 @@ class Usos_model extends  CI_Model{
 
     public  function  leer(){
         $this->db->order_by('ID DESC');
-        $query = $this->db->get('Usos');
+        $query = $this->db->get('usos');
         return $query->result();
     }
 

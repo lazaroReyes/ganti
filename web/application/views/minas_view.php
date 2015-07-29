@@ -20,8 +20,7 @@ if (isset($actualizarMina)) {
             <div class="col-lg-12">
                 <h1 class="page-header">Departamentos</h1>
                 <?php if ($this->session->userdata('perfil') == 'Administrador') { ?>
-                    <form action="<?php echo base_url(); ?>minas/<?php echo $action; ?>" method="post"
-                          class="margin-bottom">
+                    <?php echo form_open("minas/$action", 'method="post" class="margin-bottom"'); ?>
                         <?php echo $ID; ?>
                         <div class="form-group">
                             <div class="col-sm-6">
@@ -48,7 +47,7 @@ if (isset($actualizarMina)) {
                         if ($actualizar) { ?>
                             <span id="actualizadoCorrectamente"><?= $actualizar ?></span>
                         <?php } ?>
-                    </form>
+                    <?php echo form_close(); ?>
                 <?php } ?>
                 <div class="divider"></div>
                 <div class="col-lg-12 table-responsive">

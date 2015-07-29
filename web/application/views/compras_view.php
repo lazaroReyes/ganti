@@ -49,7 +49,7 @@ if (isset($actualizarCompra)) {
                 <h1 class="page-header">Requisiciones</h1>
                 <div class="divider"></div>
                     <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
-                        <form action="<?php echo base_url(); ?>compras/<?php echo $action; ?>" method="post" class="margin-bottom">
+                        <?php echo form_open("compras/$action", 'method="post" class="margin-bottom"'); ?>
                             <?php echo $ID; ?>
                             <?php if ($ID == ''){?>
                             <div class="col-sm-4">
@@ -169,8 +169,11 @@ if (isset($actualizarCompra)) {
                                     <div class="col-sm-4">
                                         <label for="IDTarjeta">Tarjeta:</label>
                                         <?php if ($EstadoDeCompra == 'Recibido' || $EstadoDeCompra == 'Enviado'){ ?>
-                                            <input type="hidden" name="IDTarjeta" id="IDTarjeta" class="form-control"
-                                                   value="<?php echo $IDTarjeta ?>"/> <?php echo $IDTarjeta  ?>
+                                            <?php foreach ($tarjetasGuardadas as $tarjetas) :  if ($IDTarjeta == $tarjetas->ID) { ?>
+                                                <input type="hidden" name="IDTarjeta" id="IDTarjeta" class="form-control"
+                                                       value="<?php echo $IDTarjeta ?>"/><?php echo $tarjetas->Descripcion;
+                                                break;
+                                            } endforeach; ?>
                                         <?php }else { ?>
                                         <select name="IDTarjeta" id="IDTarjeta" class="form-control">
                                             <option value="Efectivo">Efectivo</option>
@@ -283,10 +286,12 @@ if (isset($actualizarCompra)) {
                                     </div>
                             <?php } ?>
                             <div class="form-group">
+                                <?php if($EstadoDeCompra != 'Recibido' ) { ?>
                                 <div class="col-sm-3">
                                     <input type="submit" name="guardar" class="btn red-submit form-control"
                                            value="<?php echo $button ?>"/>
                                 </div>
+                                <?php } ?>
                                 <div class="clearfix"></div>
                             </div>
                             <?php
@@ -297,6 +302,7 @@ if (isset($actualizarCompra)) {
                             <?php
                             }
                             ?>
+                        <?php echo form_close(); ?>
                         </form>
                     <?php } ?>
                     <div class="divider"></div>
@@ -321,6 +327,7 @@ if (isset($actualizarCompra)) {
                                 <th>Fecha del pedido</th>
                                 <th>Fecha enviado</th>
                                 <th>Fecha recibido</th>
+                                <th>Imprimir</th>
                                 <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                                     <th class="text-center">Editar</th>
                                 <?php if ($this->session->userdata('perfil') == 'Administrador'){?>
@@ -365,6 +372,9 @@ if (isset($actualizarCompra)) {
                                         <td><?php echo $compra->FechaPedido; ?></td>
                                         <td><?php echo $compra->FechaEnviado; ?></td>
                                         <td><?php echo $compra->FechaRecibido; ?></td>
+                                        <td class="text-center">
+                                            <a href="<?php echo base_url(); ?>pdf_ci/index/<?php echo $compra->ID; ?>" target="_blank"><i class="fa fa-print" style="color:white"></i></a>
+                                        </td>
                                         <?php if ($this->session->userdata('perfil') == 'Administrador' || $this->session->userdata('perfil') == 'Compras') { ?>
                                             <td class="text-center">
                                                 <a href="<?php echo base_url(); ?>compras/index/<?php echo $compra->ID; ?>"><i class="fa fa-pencil-square-o"></i></a>
@@ -393,6 +403,5 @@ if (isset($actualizarCompra)) {
     function ver() {
         var seleccion = document.getElementById('MDP');
         MDPSeleccionado = seleccion.value;
-        alert(MDPSeleccionado);
     }
 </script>

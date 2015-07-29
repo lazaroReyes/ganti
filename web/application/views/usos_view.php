@@ -29,7 +29,7 @@ if(isset($actualizarUso)){
                     <h1 class="page-header">Usos del Inventario</h1>
                     <div class="divider"></div>
                     <?php if($this->session->userdata('perfil')=='Administrador' || $this->session->userdata('perfil')=='Compras'){?>
-                        <form action="<?php echo base_url();?>usos/<?php echo $action;?>" method="post" class="margin-bottom">
+                        <?php echo form_open("usos/$action", 'method="post" class="margin-bottom"'); ?>
                             <?php echo $ID; ?>
                             <div class="form-group">
                                 <div class="col-sm-6">
@@ -84,7 +84,7 @@ if(isset($actualizarUso)){
                                 <?php
                             }
                             ?>
-                        </form>
+                        <?php echo form_close(); ?>
                     <?php } ?>
                     <div class="divider"></div>
                     <div class="col-lg-12 table-responsive">
@@ -98,8 +98,6 @@ if(isset($actualizarUso)){
                                 <th>Usuario</th>
                                 <th>Recibe</th>
                                 <th>Fecha</th>
-                                <th class="text-center">Editar</th>
-                                <th class="text-center">Eliminar</th>
                                 </thead>
                                 <tbody>
 

@@ -16,7 +16,7 @@ class Compras_model extends  CI_Model{
 
     public  function  leer(){
         $this->db->order_by('ID DESC');
-        $query = $this->db->get('Compras');
+        $query = $this->db->get('compras');
         return $query->result();
     }
 

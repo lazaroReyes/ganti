@@ -31,10 +31,10 @@ class Login extends CI_Controller
 				redirect(base_url().'admin');
 				break;
 			case 'Compras':
-				redirect(base_url().'Compras');
+				redirect(base_url().'compras');
 				break;	
 			case 'Usuario':
-				redirect(base_url().'Compras');
+				redirect(base_url().'compras');
 				break;
 			default:		
 				$data['titulo'] = 'Iniciar sesión';
@@ -76,21 +76,20 @@ class Login extends CI_Controller
 	                'is_logued_in' 	=> 		TRUE,
 	                'id_usuario' 	=> 		$check_user->ID,
 	                'perfil'		=>		$check_user->perfil,
-	                'username' 		=> 		$check_user->username,
-	                'email' 		=> 		$check_user->email
+	                'username' 		=> 		$check_user->username
             		);		
 					$this->session->set_userdata($data);
 					$this->index();
 				}
 			}
 		}else{
-			redirect(base_url().'login');
+			redirect(base_url().'admin');
 		}
 	}
 
 	public function logout_ci()
 	{
 		$this->session->sess_destroy();
-		$this->index();
+		redirect(base_url().'admin');
 	}
 }
