@@ -73,6 +73,11 @@
     text-decoration: none;
 }
 
+.pagination>.active>span {
+    background-color: #F11C1E !important;
+    border-color: #F11C1E !important;
+}
+
 /* MISC */
 body {
     background-color: #fff;

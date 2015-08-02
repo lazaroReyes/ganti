@@ -15,7 +15,7 @@ class Compras_model extends  CI_Model{
     }
 
     public  function  leer(){
-        $this->db->order_by('ID DESC');
+        $this->db->order_by('FechaRequerido DESC');
         $query = $this->db->get('compras');
         return $query->result();
     }
@@ -42,5 +42,26 @@ class Compras_model extends  CI_Model{
             return true;
         else
             return false;
+    }
+
+    public function total_registros()
+    {
+        return $this->db->count_all('compras');
+    }
+
+    public function traer_compras($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('FechaRequerido DESC');
+        $query = $this->db->get('compras');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
     }
 }

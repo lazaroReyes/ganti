@@ -43,4 +43,25 @@ class Usos_model extends  CI_Model{
         else
             return false;
     }
+
+    public function total_registros()
+    {
+        return $this->db->count_all('usos');
+    }
+
+    public function traer_usos($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('Fecha DESC');
+        $query = $this->db->get('usos');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
+    }
 }

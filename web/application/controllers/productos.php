@@ -13,6 +13,7 @@ class Productos extends CI_Controller
         $this->load->model('productos_model');
         $this->load->helper(array('url','form'));
         $this->load->helper('url');
+        $this->load->library('pagination');
         $this->load->database('default');
     }
 
@@ -37,9 +38,35 @@ class Productos extends CI_Controller
         $data['main_content']='inicio';
 
         $this->load->model('productos_model');
-        $data['productosGuardadas'] = $this->productos_model->leer();
+        //$data['productosGuardadas'] = $this->productos_model->leer();
+        $config = array();
+        $config["base_url"] = base_url() . "productos/index/pag";
+        $config["total_rows"] = $this->productos_model->total_registros();
+        $config["per_page"] = 5;
+        $config["uri_segment"] = 4;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><span>';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
 
-        if($this->uri->segment(3)!=''){
+        $config['prev_link'] = '&laquo;';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo;';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $data["productosGuardadas"] = $this->productos_model->
+        traer_productos($config["per_page"], $page);
+        $data["links"] = $this->pagination->create_links();
+
+
+        if($this->uri->segment(3)!='' && $this->uri->segment(3) != 'pag'){
             $id = $this->uri->segment(3);
             $data['actualizarProducto'] = $this->productos_model->consultaProducto($id);
         }

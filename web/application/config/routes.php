@@ -40,6 +40,9 @@
 
 $route['default_controller'] = "login";
 $route['404_override'] = '';
+$route['compras/index/pag/:num'] = 'compras/index';
+$route['productos/index/pag/:num'] = 'productos/index';
+$route['usos/index/pag/:num'] = 'usos/index';
 
 
 /* End of file routes.php */

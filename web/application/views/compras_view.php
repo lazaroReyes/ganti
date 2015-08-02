@@ -308,6 +308,9 @@ if (isset($actualizarCompra)) {
                     <div class="divider"></div>
                     <div class="col-lg-12 table-responsive">
                         <?php if (count($comprasGuardados) > 0): ?>
+                            <?php if(isset($links)): ?>
+                                    <div class="pull-right"><?php echo $links; ?></div>
+                            <?php  endif;?>
                             <table class="table table-striped table-condensed">
                                 <thead>
                                 <th>Requisición</th>

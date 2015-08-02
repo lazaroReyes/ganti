@@ -49,4 +49,25 @@ class Productos_model extends  CI_Model{
         else
             return false;
     }
+
+    public function total_registros()
+    {
+        return $this->db->count_all('productos');
+    }
+
+    public function traer_productos($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('ID DESC');
+        $query = $this->db->get('productos');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
+    }
 }

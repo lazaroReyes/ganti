@@ -73,7 +73,9 @@ if(isset($actualizarUso)){
                                 <div class="clearfix"></div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn red-submit" name="guardar" value="<?php echo $button?>" />
+                                <div class="col-sm-3">
+                                    <input type="submit" class="btn red-submit" name="guardar" value="<?php echo $button?>" />
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                             <p></p>
@@ -89,6 +91,9 @@ if(isset($actualizarUso)){
                     <div class="divider"></div>
                     <div class="col-lg-12 table-responsive">
                         <?php if(count($usosGuardados)>0):?>
+                            <?php if(isset($links)): ?>
+                                <div class="pull-right"><?php echo $links; ?></div>
+                            <?php  endif;?>
                             <table class="table table-striped table-condensed">
                                 <thead>
                                 <th>Uso</th>
