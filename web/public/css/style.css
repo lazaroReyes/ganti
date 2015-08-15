@@ -100,6 +100,39 @@ table {
 .margin-bottom {
     margin-bottom: 30px;
 }
+
+#search-button,#term {
+    height: 35px !important;
+}
+
+#search-button {
+    margin-top: 5px;
+}
+
+#search-button .ui-selectmenu-text {
+    color: #000 !important;
+}
+
+#search-button.ui-state-hover, #search-button.ui-state-focus {
+    border: 1px solid #fff !important;
+}
+
+#search-button.ui-state-hover > .ui-selectmenu-text, #search-button.ui-state-focus > .ui-selectmenu-text {
+    color: #fff !important;
+}
+
+#search-menu.ui-menu .ui-menu-item.ui-state-focus, #search-menu.ui-menu .ui-menu-item.ui-state-hover {
+    border: 1px solid #fff !important;
+    color: #fff !important;
+}
+
+.ui-widget-header {
+    border: 1px solid #fff !important;
+}
+
+.searcher {
+    padding-top: 15px;
+}
 /* MEDIA QUERY */
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 768px) {

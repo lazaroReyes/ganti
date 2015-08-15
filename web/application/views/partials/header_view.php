@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="<?= base_url() ?>public/css/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="<?= base_url() ?>public/css/metisMenu/metisMenu.min.css"/>
     <link rel="stylesheet" href="<?= base_url() ?>public/css/sb-admin-2/sb-admin-2.css"/>
+    <link rel="stylesheet" href="<?=base_url()?>public/css/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>public/css/jqueryui/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="<?=base_url()?>public/css/jqueryui/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>public/css/style.css"/>
 </head>
 <body>

@@ -308,9 +308,35 @@ if (isset($actualizarCompra)) {
                     <div class="divider"></div>
                     <div class="col-lg-12 table-responsive">
                         <?php if (count($comprasGuardados) > 0): ?>
+                            <div class="col-sm-12">
+                                <div class="pull-left searcher">
+                                    <form action="<?php echo base_url(); ?>" class="form-inline" data-target="compras" id="ganti-search">
+                                        <div class="form-group">
+                                            <label for="search"></label>
+                                            <select name="search" id="search" class="prettyselect">
+                                                <option value="0">Factura</option>
+                                                <option value="1">Tarjeta</option>
+                                                <option value="2">Fecha Requisición</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="term"></label>
+                                            <div class="input-group" id="search-input">
+                                                <input type="text" id="term" class="form-control" placeholder="Buscar" />
+                                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                            </div>
+                                            <div class="input-group" id="search-date">
+                                                <input type="text" id="datepicker" class="form-control" placeholder="Fecha" />
+                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
                             <?php if(isset($links)): ?>
                                     <div class="pull-right"><?php echo $links; ?></div>
                             <?php  endif;?>
+                            </div>
                             <table class="table table-striped table-condensed">
                                 <thead>
                                 <th>Requisición</th>
