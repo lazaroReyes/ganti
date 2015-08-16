@@ -64,4 +64,64 @@ class Compras_model extends  CI_Model{
         return false;
 
     }
+
+    public function traer_facturas($limit, $start, $term) {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('FechaRequerido DESC');
+        $sql = "SELECT * FROM compras WHERE NoFactura LIKE '%$term%'";
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            $data[] = $query->num_rows();
+            return $data;
+        }
+        return false;
+
+
+    }
+
+    public function traer_tarjetas($limit, $start, $term)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('FechaRequerido DESC');
+        $sql = "
+          SELECT c.ID, c.IDProducto, c.Descripcion, c.Cantidad, c.Costo, c.NoFactura,
+          c.MetodoPago, c.IDProveedor, c.EstadoDeCompra, c.IDUsuario, c.IDTarjeta,
+          c.IDMaquina, c.IDMina, c.FechaRequerido, c.FechaPedido, c.FechaEnviado, c.FechaRecibido
+          FROM compras as c INNER JOIN tarjetas as t ON c.IDTarjeta = t.ID
+          WHERE t.Descripcion LIKE '%$term%'
+          ";
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            $data[] = $query->num_rows();
+            return $data;
+        }
+        return false;
+    }
+
+    public function traer_fechaRequerido($limit, $start, $term)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('FechaRequerido DESC');
+        $sql = "
+          SELECT * FROM compras WHERE FechaRequerido LIKE '%$term%'
+          ";
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            $data[] = $query->num_rows();
+            return $data;
+        }
+        return false;
+    }
 }
