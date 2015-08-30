@@ -46,12 +46,40 @@ class Compras_model extends  CI_Model{
 
     public function total_registros()
     {
-        return $this->db->count_all('compras');
+        $sql = "SELECT * FROM compras WHERE EstadoDeCompra != 'Recibido'";
+        $query = $this->db->query($sql);
+        $num = $query->num_rows();
+        return $num;
+    }
+    public function total_recibidos()
+    {
+        $sql = "SELECT * FROM compras WHERE EstadoDeCompra = 'Recibido'";
+        $query = $this->db->query($sql);
+        $num = $query->num_rows();
+        return $num;
     }
 
     public function traer_compras($limit, $start)
     {
         $this->db->limit($limit, $start);
+        $this->db->where('EstadoDeCompra !=','Recibido');
+        $this->db->order_by('FechaRequerido DESC');
+        $query = $this->db->get('compras');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
+    }
+
+    public function traer_compras_recibidas($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->where('EstadoDeCompra','Recibido');
         $this->db->order_by('FechaRequerido DESC');
         $query = $this->db->get('compras');
 
