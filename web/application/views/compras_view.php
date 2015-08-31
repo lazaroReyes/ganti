@@ -333,6 +333,8 @@ if (isset($actualizarCompra)) {
                             <div class="form-group">
                                 <input type="submit" class="btn red-submit form-control no-margin margin-left"
                                        value="Buscar"/>
+                                <input type="button" class="btn form-control no-margin margin-left" onclick="location.href='<?php echo base_url(); ?>compras'" value="En progreso">
+                                <input type="button" class="btn red-submit form-control no-margin margin-left" onclick="location.href='<?php echo base_url(); ?>compras/recibidos'" value="Recibidos">
                             </div>
                         </form>
                     </div>
