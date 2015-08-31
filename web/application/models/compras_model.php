@@ -152,4 +152,113 @@ class Compras_model extends  CI_Model{
         }
         return false;
     }
+
+    public function traer_producto($limit, $start, $term)
+    {
+        $sql = "SELECT ID FROM productos WHERE Clave = '$term'";
+
+        $query = $this->db->query($sql);
+
+        $obj = $query->row();
+        if(!empty($obj)) {
+            $this->db->limit($limit, $start);
+            $this->db->order_by('FechaRequerido DESC');
+            $sql = "
+          SELECT * FROM compras WHERE IDProducto = '$obj->ID'
+          ";
+            $query = $this->db->query($sql);
+
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                $data[] = $query->num_rows();
+                return $data;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+    public function traer_mina($limit, $start, $term)
+    {
+        $sql = "SELECT ID FROM minas WHERE Nombre = '$term'";
+
+        $query = $this->db->query($sql);
+
+        $obj = $query->row();
+        if(!empty($obj)) {
+            $this->db->limit($limit, $start);
+            $this->db->order_by('FechaRequerido DESC');
+            $sql = "
+          SELECT * FROM compras WHERE IDMina = '$obj->ID'
+          ";
+            $query = $this->db->query($sql);
+
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                $data[] = $query->num_rows();
+                return $data;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+    public function traer_entregado($limit, $start, $term)
+    {
+        $this->db->limit($limit, $start);
+        $this->db->order_by('FechaRecibido DESC');
+        $sql = "
+          SELECT * FROM compras WHERE FechaRecibido LIKE '%$term%'
+          ";
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            $data[] = $query->num_rows();
+            return $data;
+        }
+        return false;
+    }
+
+    public function traer_usuario($limit, $start, $term)
+    {
+        $sql = "SELECT ID FROM users WHERE username = '$term'";
+
+        $query = $this->db->query($sql);
+
+        $obj = $query->row();
+        if(!empty($obj)) {
+            $this->db->limit($limit, $start);
+            $this->db->order_by('FechaRequerido DESC');
+            $sql = "
+          SELECT * FROM compras WHERE IDUsuario = '$obj->ID'
+          ";
+            $query = $this->db->query($sql);
+
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                $data[] = $query->num_rows();
+                return $data;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
 }

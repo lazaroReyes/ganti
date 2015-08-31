@@ -314,9 +314,14 @@ if (isset($actualizarCompra)) {
                                 <label for="search"></label>
                                 <select name="search" id="search" class="prettyselect">
                                     <option value="null">Buscar por</option>
+                                    <option value="fetchById">Por ID</option>
                                     <option value="fetchByInvoice">Factura</option>
                                     <option value="fetchByCard">Tarjeta</option>
                                     <option value="fetchByDate">Fecha Requisición</option>
+                                    <option value="fetchByProduct">Producto</option>
+                                    <option value="fetchByMine">Mina</option>
+                                    <option value="fetchByDeliver">Fecha Entregado</option>
+                                    <option value="fetchByUser">Usuario</option>
                                 </select>
                             </div>
                             <div class="form-group">

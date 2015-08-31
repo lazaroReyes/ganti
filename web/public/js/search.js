@@ -67,6 +67,45 @@ $(document).ready(function () {
                 url = base_url + search.controller + '/' +select_search.val();
                 search.form.attr('action', url);
                 break;
+
+            case 'fetchByProduct':
+                search.form.find('#search-input').removeClass('hidden');
+                search.form.find('#term').attr('disabled', false);
+                search.form.find('#term').attr('placeholder', 'Producto');
+                search.form.find('#search-date').addClass('hidden');
+                search.form.find('#datepicker').attr('disabled', true);
+                url = base_url + search.controller + '/' +select_search.val();
+                search.form.attr('action', url);
+                break;
+
+            case 'fetchByMine':
+                search.form.find('#search-input').removeClass('hidden');
+                search.form.find('#term').attr('disabled', false);
+                search.form.find('#term').attr('placeholder', 'Mina');
+                search.form.find('#search-date').addClass('hidden');
+                search.form.find('#datepicker').attr('disabled', true);
+                url = base_url + search.controller + '/' +select_search.val();
+                search.form.attr('action', url);
+                break;
+
+            case 'fetchByDeliver':
+                search.form.find('#search-date').removeClass('hidden');
+                search.form.find('#datepicker').attr('disabled', false);
+                search.form.find('#datepicker').attr('placeholder', 'Fecha');
+                search.form.find('#search-input').addClass('hidden');
+                search.form.find('#term').attr('disabled', true);
+                url = base_url + search.controller + '/' +select_search.val();
+                search.form.attr('action', url);
+                break;
+
+            case 'fetchByUser':
+                search.form.find('#search-input').removeClass('hidden');
+                search.form.find('#term').attr('disabled', false);
+                search.form.find('#term').attr('placeholder', 'Nombre de Usuario');
+                search.form.find('#search-date').addClass('hidden');
+                search.form.find('#datepicker').attr('disabled', true);
+                url = base_url + search.controller + '/' +select_search.val();
+                search.form.attr('action', url);
         }
     });
 });
