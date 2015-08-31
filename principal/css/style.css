@@ -298,6 +298,13 @@ body {
     content: '- ';
 }
 
+/* scroll fixes */
+.modal-open .modal {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  overflow-y: scroll;
+}
+
 /** MEDIA QUERY **/
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 768px) { 
