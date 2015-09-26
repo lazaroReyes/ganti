@@ -106,6 +106,15 @@ $(document).ready(function () {
                 search.form.find('#datepicker').attr('disabled', true);
                 url = base_url + search.controller + '/' +select_search.val();
                 search.form.attr('action', url);
+                break;
+            case 'fetchById':
+                search.form.find('#search-input').removeClass('hidden');
+                search.form.find('#term').attr('disabled', false);
+                search.form.find('#term').attr('placeholder', 'ID del requisición');
+                search.form.find('#search-date').addClass('hidden');
+                search.form.find('#datepicker').attr('disabled', true);
+                url = base_url + search.controller + '/' +select_search.val();
+                search.form.attr('action', url);
         }
     });
 });

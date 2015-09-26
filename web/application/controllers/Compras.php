@@ -256,7 +256,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByInvoice/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_facturas($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_facturas($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -318,7 +318,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByCard/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_tarjetas($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_tarjetas($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -381,7 +381,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByDate/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_fechaRequerido($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_fechaRequerido($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -443,7 +443,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByProduct/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_producto($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_producto($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -505,7 +505,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByMine/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_mina($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_mina($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -567,7 +567,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByDeliver/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_entregado($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_entregado($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -629,7 +629,7 @@ class Compras extends CI_Controller
         $config["base_url"] = base_url() . "compras/fetchByUser/pag";
         $config["per_page"] = 5;
         $results = $this->compras_model->traer_usuario($config['per_page'], $page, $term);
-        $config["total_rows"] = !empty($results) ? array_pop($results) : 0;
+        $config["total_rows"] = $this->compras_model->total_usuario($term);
         $config["uri_segment"] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
@@ -653,6 +653,68 @@ class Compras extends CI_Controller
 
         $this->load->view('partials/header_view', $data);
         $this->load->view('compras_view', $data);
+        $this->load->view('partials/footer_view');
+    }
+
+    public function fetchById()
+    {
+        $data['titulo'] = 'Compras';
+        $data['main_content']='inicio';
+
+        $term = '';
+
+        if($this->input->post('term')) {
+            $term = $this->input->post('term');
+            $this->session->set_userdata('search_term', $term);
+        } else if($this->session->userdata('search_term')) {
+            $term = $this->session->userdata('search_term');
+        }
+
+
+        $this->load->model('minas_model');
+        $data['minasGuardadas'] = $this->minas_model->leer();
+        $this->load->model('productos_model');
+        $data['productosGuardados'] = $this->productos_model->leer();
+        $this->load->model('login_model');
+        $data['usuariosGuardados'] = $this->login_model->leer();
+        $this->load->model('proveedores_model');
+        $data['proveedoresGuardados'] = $this->proveedores_model->leer();
+        $this->load->model('tarjetas_model');
+        $data['tarjetasGuardadas'] = $this->tarjetas_model->leer();
+        $this->load->model('maquinas_model');
+        $data['maquinasGuardadas'] = $this->maquinas_model->leer();
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+        $this->load->model('compras_model');
+
+        $config = array();
+        $config["base_url"] = base_url() . "compras/fetchByCard/pag";
+        $config["per_page"] = 5;
+        $results = $this->compras_model->traer_id($config['per_page'], $page, $term);
+        $config["total_rows"] = $this->compras_model->total_id($term);
+        $config["uri_segment"] = 4;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><span>';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+
+        $config['prev_link'] = '&laquo;';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo;';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+
+
+        $data["comprasGuardados"] = !empty($results) ? $results : null;
+        $data["links"] = $this->pagination->create_links();
+
+        $this->load->view('partials/header_view', $data);
+        $this->load->view('compras_view',$data);
         $this->load->view('partials/footer_view');
     }
 }
